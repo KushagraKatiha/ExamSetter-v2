@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Select, options, Input } from './index'
+import { Select, options, Input, Button } from './index'
 
 function TestPaperDetails() {
     const examList = [
@@ -41,41 +41,70 @@ function TestPaperDetails() {
 
 
     return (
-        <div className='grid grid-cols-4 gap-3 bg-gradient-to-r from-[#a77ed6] to-[#ffffff] w-1/2 pb-2 pl-2 border-r-2 border-r-black'>
-            <div>
-                <Select options={examList} label='Exam Name' />
-                <div className='flex flex-col'>
-                    <Input label='Teacher' type='text' placeholder='Teacher...' onChange={(e) => setTeacherName(e.target.value)} />
-                    <Input label='Teacher ID' type='text' placeholder='Id...' onChange={(e) => setTeacherId(e.target.value)} />
-                </div>
-            </div>
-            <div>
-                <Input label='Course Name' type='text' placeholder='Enter course name...' onChange={(e) => setCourseName(e.target.value)} />
-                <Input label='Course Code' type='text' placeholder='Enter course code...' onChange={(e) => setCourseCode(e.target.value)} />
-                <Select options={semesterList} label='Semester' onChange={(e) => setSemester(e.target.value)} />
-            </div>
+        <div className='bg-gradient-to-r from-[#a77ed6] to-[#ffffff] mb-2'>
+            <table className='w-full border-collapse'>
+                <tbody>
+                    {/* First Row */}
+                    <tr>
+                        <td className='p-2'>
+                            <Select options={examList} label='Exam Name' onChange={(e) => setExamName(e.target.value)} />
+                        </td>
+                        <td className='p-2'>
+                            <Input label='Teacher' type='text' placeholder='Teacher...' onChange={(e) => setTeacherName(e.target.value)} />
+                        </td>
+                        <td className='p-2'>
+                            <Input label='Teacher ID' type='text' placeholder='Id...' onChange={(e) => setTeacherId(e.target.value)} />
+                        </td>
+                    </tr>
 
+                    {/* Second Row */}
+                    <tr>
+                        <td className='p-2'>
+                            <Input label='Course Name' type='text' placeholder='Enter course name...' onChange={(e) => setCourseName(e.target.value)} />
+                        </td>
+                        <td className='p-2'>
+                            <Input label='Course Code' type='text' placeholder='Enter course code...' onChange={(e) => setCourseCode(e.target.value)} />
+                        </td>
+                        <td className='p-2'>
+                            <Select options={semesterList} label='Semester' onChange={(e) => setSemester(e.target.value)} />
+                        </td>
+                    </tr>
 
-            <div className='flex flex-col gap-3'>
-                <Select options={options} label='Program Name' onChange={handleProgramSelection} />
-                <Input type='text' placeholder='Other Program...' onChange={(e) => setOtherProgram(e.target.value)} />
+                    {/* Third Row */}
+                    <tr>
+                        <td className='p-2'>
+                            <Select options={options} label='Program Name' onChange={handleProgramSelection} />
+                        </td>
+                        <td className='p-2 content-end'>
+                            <Input type='text' placeholder='Other Program...' onChange={(e) => setOtherProgram(e.target.value)} />
+                        </td>
+                        <td className='p-2 content-end'>
+                            <Button className='w-full' label='Save' /> {/* TODO: make a function to update the state of the exam details */}
+                        </td>
+                    </tr>
 
-            </div>
-
-            <div className='mt-1'>
-                {selectedPrograms.map((program, index) => (
-                    <div key={index} className='w-fit mb-1 bg-black rounded-lg px-2 py-1'>
-                        <span className='text-white text-sm'>{program}</span>
-                        <button
-                            onClick={() => handleRemoveProgram(program)}
-                            className='text-red-500 text-sm focus:outline-none'
-                        >
-                            &#10005;
-                        </button>
-                    </div>
-                ))}
-            </div>
+                    {/* Fourth Row */}
+                    <tr>
+                        <td colSpan="3" className='p-2'>
+                            <div className='mt-1'>
+                                {selectedPrograms.map((program, index) => (
+                                    <div key={index} className='inline-block mb-1 bg-black rounded-lg px-2 py-1 mr-2'>
+                                        <span className='text-white text-sm'>{program}</span>
+                                        <button
+                                            onClick={() => handleRemoveProgram(program)}
+                                            className='text-red-500 text-sm focus:outline-none ml-1'
+                                        >
+                                            &#10005;
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
     )
 }
 

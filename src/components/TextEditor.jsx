@@ -8,7 +8,7 @@ function TextEditor() {
     const [content, setContent] = useState('')
     const config = useMemo(() => ({
         readonly: false,
-        toolbarButtonSize: 'large'
+        toolbarButtonSize: 'medium'
     }), [])
 
     return (
