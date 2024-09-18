@@ -41,7 +41,7 @@ function TestPaperDetails() {
 
 
     return (
-        <div className='bg-gradient-to-r from-[#a77ed6] to-[#ffffff] mb-2'>
+        <div className='bg-[#a77ed6] mb-2'>
             <table className='w-full border-collapse'>
                 <tbody>
                     {/* First Row */}
