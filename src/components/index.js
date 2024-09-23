@@ -14,5 +14,7 @@ import Image from "./Image";
 
 // Question Import
 import ShortQuestion from "./questions/ShortQuestion";
+import LongQuestion from "./questions/LongQuestion";
+import SubLongQuestion from "./questions/SubLongQuestion";
 
-export {ShortQuestion, Image, Banner, Credits, Input, Button, TestPaper, TextEditor, Select, courses, TestPaperDetails, SetQuestionPaper, Bloom, TestPaperHeader };
+export {LongQuestion, SubLongQuestion, ShortQuestion, Image, Banner, Credits, Input, Button, TestPaper, TextEditor, Select, courses, TestPaperDetails, SetQuestionPaper, Bloom, TestPaperHeader };

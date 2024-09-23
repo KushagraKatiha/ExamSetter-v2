@@ -23,7 +23,7 @@ function App() {
         </div>
 
         {/* Right Part */}
-        <div className="bg-white">
+        <div className="w-1/2 overflow-x-scroll bg-white">
             <TestPaper/>
         </div>
       </div>

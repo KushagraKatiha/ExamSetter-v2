@@ -3,11 +3,11 @@ import { Image } from '../index'
 
 function ShortQuestion({ QuesNo, Text, MM = 2, Unit, BTL, CO, ImageSrc = null }) {
     return (
-        <>
+        <div className='border-2 border-red-600'>
             <div className="w-full flex gap-3 justify-between mb-1">
                 <div className="flex flex-col">
                     <div className="flex text-xs ">
-                        <span className="ml-2 font-medium text-xs mr-1">{QuesNo}.</span><p className="text-xs text-justify" >
+                        <span className="ml-2 font-medium text-xs mr-1">{QuesNo}.</span><p className="text-xs text-justify">
                             {Text}
                         </p>
                     </div>
@@ -24,7 +24,7 @@ function ShortQuestion({ QuesNo, Text, MM = 2, Unit, BTL, CO, ImageSrc = null })
                     <span>{CO}</span>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

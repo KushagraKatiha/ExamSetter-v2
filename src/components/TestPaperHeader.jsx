@@ -2,8 +2,8 @@ import React from 'react'
 
 function TestPaperHeader() {
   return (
-    <>
-        <div className="bg-black mt-2">
+    <div className='border-2 border-pink-400 mt-2'>
+        <div className="bg-black">
             <img src="src/assets/test-paper-header.jpg" alt="banner" className="w-full h-[100px]" />
         </div>
 
@@ -68,7 +68,7 @@ function TestPaperHeader() {
             *Bloom Level{" "}
             {`{1-Remenbering, 2-Understanding, 3-Applying, 4-Analyzing, 5-Evaluating, 6-Creating}`}
         </p>
-    </>
+    </div>
   )
 }
 
