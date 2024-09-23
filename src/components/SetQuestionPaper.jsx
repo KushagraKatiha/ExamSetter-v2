@@ -443,7 +443,7 @@ const handleImageChange = (e) => {
             )}
 
             {/* Container to set sub details */}
-            <div className='flex justify-evenly bg-black border-2 border-[#9c36b5] p-2 w-full rounded-lg'>
+            <div className='flex justify-evenly gap-2 bg-black border-2 border-[#9c36b5] p-2 w-full rounded-lg'>
               {/* container to set unit */}
                 <Select options={unitOptions} optionStyle='w-fit' onChange={handleUnit} value={unit} label='Unit' labelStyle='text-white text-sm'/>
       

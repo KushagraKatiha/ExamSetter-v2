@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Select, options, Input, Button } from './index'
+import { Select, courses, Input, Button } from './index'
 
 function TestPaperDetails() {
     const examList = [
@@ -73,7 +73,7 @@ function TestPaperDetails() {
                     {/* Third Row */}
                     <tr>
                         <td className='p-2'>
-                            <Select options={options} label='Program Name' onChange={handleProgramSelection} />
+                            <Select options={courses} label='Program Name' onChange={handleProgramSelection} />
                         </td>
                         <td className='p-2 content-end'>
                             <Input type='text' placeholder='Other Program...' onChange={(e) => setOtherProgram(e.target.value)} />

@@ -1,4 +1,4 @@
-const options = [
+const courses = [
     {   
         value: 'B.Tech CSE',
         fullName: 'B.Tech. (CSE) (Computer Sciences and Engineering)'
@@ -89,4 +89,4 @@ const options = [
     }
 ];
 
-export default options;
+export default courses;

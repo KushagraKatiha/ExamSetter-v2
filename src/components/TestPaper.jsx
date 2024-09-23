@@ -1,12 +1,11 @@
 import React from 'react'
-
+import {ShortQuestion, TestPaperHeader} from './index.js'
 function TestPaper() {
 
   const longQuestions = [
     {
       ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
       image: "",
-      maxMarks: 10,
       unit: "Unit 1",
       bloomLevel: "3",
       co: "CO1"
@@ -14,7 +13,6 @@ function TestPaper() {
     {
       ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
       image: "",
-      maxMarks: 10,
       unit: "Unit 1",
       bloomLevel: "3",
       co: "CO1"
@@ -22,7 +20,6 @@ function TestPaper() {
     {
       ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
       image: "",
-      maxMarks: 10,
       unit: "Unit 1",
       bloomLevel: "3",
       co: "CO1"
@@ -30,69 +27,50 @@ function TestPaper() {
     {
       ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
       image: "",
-      maxMarks: 10,
       unit: "Unit 1",
       bloomLevel: "3",
       co: "CO1"
     },
-    {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      maxMarks: 10,
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-
   ]
 
   const shortQuestions = [
     {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      maxMarks: 10,
+      ques: "These are short questions",
       unit: "Unit 1",
       bloomLevel: "3",
       co: "CO1"
     },
     {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      maxMarks: 10,
+      ques: "These are all short questions",
       unit: "Unit 1",
       bloomLevel: "3",
       co: "CO1"
     },
     {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      maxMarks: 10,
+      ques: "These are all short questions",
       unit: "Unit 1",
       bloomLevel: "3",
       co: "CO1"
     },
     {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      maxMarks: 10,
+      ques: "These are all short questions",
       unit: "Unit 1",
       bloomLevel: "3",
       co: "CO1"
     },
     {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      maxMarks: 10,
+      ques: "These are all short questions",
+     
       unit: "Unit 1",
       bloomLevel: "3",
       co: "CO1"
     },
     {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      maxMarks: 10,
+      ques: "These are all short questions",
+     
       unit: "Unit 1",
       bloomLevel: "3",
+      image: null,
       co: "CO1"
     },
   ]
@@ -102,71 +80,7 @@ function TestPaper() {
         <div className="px-12 bg-white">
           {/* College Banner Container */}
           {/* College Banner */}
-          <div className="bg-black mt-2">
-            <img src="src/assets/test-paper-header.jpg" alt="banner" className="w-full h-[100px]" />
-          </div>
-
-          {/* College Name, Exam Name, Program Name */}
-          <div className="mt-4 text-black flex flex-col items-center justify-center">
-            <h1 className="font-bold text-base text-center">
-              College of Computing Sciences and Information Technology
-            </h1>
-
-            <h2
-              style={{ fontStyle: "italic" }}
-              className="text-base font-extrabold"
-            >
-              {/* {examName.toUpperCase()} */}
-            </h2>
-            <h2 className="text-xs">
-              Program Name: 
-              {/* {selectedPrograms.toString().split(',').join('/')}{otherProgram ? "/" : " "}{otherProgram.toUpperCase()} */}
-
-            </h2>
-          </div>
-
-          {/* Exam Details Table */}
-          <div className="mt-1 text-black flex flex-col items-center text-xs">
-            <table className="border-black border-2 w-4/5">
-              <tbody>
-                <tr className="border-black border-2">
-                  <td className="px-2 border-black border-2">Year:
-                    {/* {year} */}
-                    </td>
-                  <td className="px-2 border-black border-2">
-                    Semester:
-                    {/* {semester} */}
-                  </td>
-                  <td className="px-2 border-black border-2">
-                    Academic Session: 
-                    {/* {academicSession} */}
-                  </td>
-                </tr>
-                <tr className="border-black border-2">
-                  <td colSpan={2} className="px-2 border-black border-2">
-                    Course Code: 
-                    {/* {courseCode.toString().toUpperCase()} */}
-                  </td>
-                  <td className="px-2 border-black border-2">
-                    Course Name: 
-                    {/* {courseName.toUpperCase()} */}
-                  </td>
-                </tr>
-                <tr className="border-black border-2">
-                  <td colSpan={2} className="px-2 border-black border-2">
-                    Duration: 90 minutes
-                  </td>
-                  <td className="px-2 border-black border-2">Max Marks: 30</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          {/* Bloom Level Details */}
-          <p className="text-xs font-bold text-black text-center">
-            *Bloom Level{" "}
-            {`{1-Remenbering, 2-Understanding, 3-Applying, 4-Analyzing, 5-Evaluating, 6-Creating}`}
-          </p>
+         <TestPaperHeader/>
 
           {/* Question Paper */}
           <h1 className="mt-4 mb-2 font-extrabold text-sm underline">
@@ -189,27 +103,7 @@ function TestPaper() {
             <h2 className="font-medium text-sm underline mb-1 mt-2 ml-4">Attemp any five question only.</h2>
             {shortQuestions.map((question, index) => {
               return (
-                <div key={index} className="ml-4 flex justify-between gap-5 items-center mb-3">
-                  <div className="flex flex-col">
-                    <div className="flex gap-1">
-                      <span className="font-medium text-xs">
-                        {String.fromCharCode(65 + index)}.
-                      </span>
-                      <div className="text-xs text-justify" dangerouslySetInnerHTML={{ __html: question.ques }}></div>
-                    </div>
-                    {question.image && (
-                      <div className="ml-4 w-1/2">
-                        <img src={question.image} className="h-[150px]" alt="Question Image" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex gap-7 mr-3 text-xs">
-                    <p>({question.maxMarks})</p>
-                    <p>{question.unit}</p>
-                    <p>{question.bloomLevel}</p>
-                    <p>{question.co}</p>
-                  </div>
-                </div>
+                <ShortQuestion key={index} QuesNo={String.fromCharCode(65 + index)} Text={question.ques} Unit={question.unit} BTL={question.bloomLevel} CO={question.co} ImageSrc={question.image}/>
               );
             })}
           </div>
@@ -225,7 +119,7 @@ function TestPaper() {
               <div>
                 <div className="flex mt-1">
                   <span className="font-bold text-sm">2.</span>
-                  {/* If long question have a object have two more objects inside it */}
+                  {/* If long question have a object which have two more objects inside it */}
                   {longQuestions[0].subQuestion1 && longQuestions[0].subQuestion2 ? (
                     <div className="flex flex-col gap-3">
                       <div className="w-full flex gap-5 justify-between">
@@ -280,7 +174,6 @@ function TestPaper() {
                             <img src={longQuestions[0].image} alt="Question Image" />
                           </div>
                         )}
-
                       </div>
                       <div className="flex gap-7 mr-3 text-xs">
                         <p>({longQuestions[0].maxMarks})</p>
