@@ -5,52 +5,46 @@ function LongQuestion({ QuesNo, Text, MM = 10, Unit, BTL, CO, ImageSrc = null, S
   return (
     <div className="w-full">
       {SubQues ? (
-        <div className="flex flex-col gap-3">
-          {/* Main Question */}
-          <div className="flex text-xs ">
-            <span className="ml-2 font-medium text-sm mr-1">{QuesNo}</span>
-            <p className="text-xs text-justify">{Text}</p>
-          </div>
-          {/* Image if present */}
-          {ImageSrc && (
-            <div className="ml-6 w-1/2">
-              <Image src={ImageSrc} />
-            </div>
-          )}
+        <div className="flex border-4 border-green-600">
           {/* Sub Questions */}
-          <div className="ml-4">
-            {SubLongQuestion.map((sub, index) => (
-              <SubQuestion
-                key={index}
-                QuesNo={sub.QuesNo}
-                Text={sub.Text}
-                MM={sub.MM}
-                Unit={sub.Unit}
-                BTL={sub.BTL}
-                CO={sub.CO}
-                ImageSrc={sub.ImageSrc}
-              />
-            ))}
+          <span>{QuesNo}</span>
+          <div className='flex w-full justify-between'>
+            <div className="w-full">
+              {SubQues.map((sub, index) => (
+                <SubLongQuestion
+                  key={index}
+                  QuesNo={String.fromCharCode(65 + index)}
+                  Text={sub.ques}
+                  MM={sub.MM}
+                  Unit={sub.unit}
+                  BTL={sub.bloomLevel}
+                  CO={sub.co}
+                  ImageSrc={sub.Image}
+                />
+              ))}
+            </div>
           </div>
         </div>
       ) : (
-        <div className="flex gap-3 justify-between">
+        <div className="w-full flex mb-1 border-2 border-blue-600">
           <div className="flex flex-col">
-            <div className="flex text-xs ">
-              <span className="ml-2 font-medium text-sm mr-1">{QuesNo}</span>
-              <p className="text-xs text-justify">{Text}</p>
+            <div className="flex text-xs">
+              <span className="font-medium text-xs mr-1">{QuesNo}.</span>
+              <p className="overflow-hidden border-2 border-red-600 w-[550px] text-xs text-justify">
+                {Text}
+              </p>
             </div>
             {ImageSrc && (
-              <div className="ml-6 w-1/2">
+              <div className="mr-auto ml-auto h-auto w-1/2">
                 <Image src={ImageSrc} />
               </div>
             )}
           </div>
-          <div className="flex gap-7 mr-3 text-xs">
-            <span>{MM}</span>
-            <span>{Unit}</span>
-            <span>{BTL}</span>
-            <span>{CO}</span>
+          <div className="flex border-2 justify-between border-pink-900 w-[30%] ml-6 text-xs">
+            <p className='border-2 border-green-800'>{MM}</p>
+            <p className='border-2 border-green-800'>{Unit}</p>
+            <p className='border-2 border-green-800'>{BTL}</p>
+            <p className='border-2 border-green-800'>{CO}</p>
           </div>
         </div>
       )}

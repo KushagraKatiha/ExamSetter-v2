@@ -1,47 +1,41 @@
-import React, { useState, useRef } from 'react';
+import React from 'react'
+import { Editor } from '@tinymce/tinymce-react'
 
-const TextEditor = ({ onContentChange }) => {
-  const editorRef = useRef(null);
-  const [editorContent, setEditorContent] = useState('<p>Start typing here...</p>');
-
-  const handleCommand = (command) => {
-    document.execCommand(command, false, null);
-  };
-
-  const handleInput = () => {
-    const htmlContent = editorRef.current.innerHTML;
-    setEditorContent(htmlContent);
-    onContentChange(htmlContent);  // Send updated HTML content to parent
-  };
-
+export default function TextEditor({defaultValue = '', label}) {
   return (
-    <div className='bg-white'>
-      {/* Toolbar */}
-      <div style={{ marginBottom: '10px' }}>
-        <button onClick={() => handleCommand('bold')}><b>B</b></button>
-        <button onClick={() => handleCommand('italic')}><i>I</i></button>
-        <button onClick={() => handleCommand('insertUnorderedList')}>• Bullets</button>
-        <button onClick={() => handleCommand('outdent')}>Outdent</button>
-        <button onClick={() => handleCommand('indent')}>Indent</button>
-      </div>
+    <div className='w-full'>
+    {label && <label className='inline-block mb-1 pl-1'>{label}</label>}   
+        <Editor
+        apiKey='46lmnc0xujc401s3e3zk2uym82cfrvhukj4b1qa8r16t13r9'
+        initialValue={defaultValue}
+        init={{
+            initialValue: defaultValue,
+            height: 300,
+            menubar: true,
+            plugins: [
+                "advlist",
+                "autolink",
+                "lists",
+                "link",
+                "charmap",
+                "preview",
+                "anchor",
+                "searchreplace",
+                "visualblocks",
+                "code",
+                "fullscreen",
+                "insertdatetime",
 
-      {/* Editable Content */}
-      <div
-        className='bg-white'
-        ref={editorRef}
-        contentEditable={true}
-        dangerouslySetInnerHTML={{ __html: editorContent }}
-        onInput={handleInput}
-        style={{
-          minHeight: '200px',
-          border: '1px solid #ccc',
-          padding: '10px',
-          outline: 'none',
-          whiteSpace: 'pre-wrap',
+                "table",
+                "code",
+                "help",
+                "wordcount"
+            ],
+            toolbar:
+                'undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic | alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
         }}
-      />
+    />
     </div>
-  );
-};
-
-export default TextEditor;
+  )
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { LongQuestion, ShortQuestion, TestPaperHeader } from './index.js'
+import { LongQuestion, ShortQuestion, ShortQuestionHeading, TestPaperHeader } from './index.js'
 function TestPaper() {
 
   const longQuestions = [
@@ -8,7 +8,20 @@ function TestPaper() {
       image: "",
       unit: "Unit 1",
       bloomLevel: "3",
-      co: "CO1"
+      co: "CO1",
+      subQues: [{
+        ques: "What is Data Mining?",
+        image: "",
+        unit: "Unit 1",
+        bloomLevel: "3",
+        co: "CO1"
+      }, {
+        ques: "What is Data Warehousing dfdfdfddddddddddd ddddddddd ddddddddddd dddddddddddddd dddddddddddd dddddddddddddddddd",
+        image: "",
+        unit: "Unit 1",
+        bloomLevel: "3",
+        co: "CO1"
+      }]
     },
     {
       ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
@@ -87,18 +100,7 @@ function TestPaper() {
         </h1>
 
         {/* Short Questions */}
-        <div className="w-full flex mb-1 border-2 border-blue-600 font-bold">
-          <div className="flex">
-            <span className="font-medium mr-1">1.</span>
-            <p className="border-2 border-red-600 w-[550px] text-justify">SHORT QUESTIONS</p>
-          </div>
-          <div className="flex border-2 justify-between border-pink-900 w-[30%] ml-5 text-sm">
-            <p>MM</p>
-            <p>Unit</p>
-            <p>BTL</p>
-            <p>CO</p>
-          </div>
-        </div>
+        <ShortQuestionHeading/>
 
         {/* Questions */}
         <div>
@@ -119,19 +121,19 @@ function TestPaper() {
             {/* Questions */}
             {/* Question 1 */}
             <div>
-              <LongQuestion QuesNo="1" Text={longQuestions[0].ques} MM={longQuestions[0].maxMarks} Unit={longQuestions[0].unit} BTL={longQuestions[0].bloomLevel} CO={longQuestions[0].co} />
+              <LongQuestion QuesNo="1" Text={longQuestions[0].ques} MM={longQuestions[0].maxMarks} Unit={longQuestions[0].unit} BTL={longQuestions[0].bloomLevel} CO={longQuestions[0].co} SubQues={longQuestions[0].subQues}/>
             </div>
             <h1 className="text-center font-semibold text-base">OR</h1>
             {/* Question 2 */}
             <div>
-              <LongQuestion QuesNo="1" Text={longQuestions[0].ques} MM={longQuestions[0].maxMarks} Unit={longQuestions[0].unit} BTL={longQuestions[0].bloomLevel} CO={longQuestions[0].co} />
+              <LongQuestion QuesNo="2" Text={longQuestions[1].ques} MM={longQuestions[1].maxMarks} Unit={longQuestions[1].unit} BTL={longQuestions[1].bloomLevel} CO={longQuestions[0].co} SubQues={longQuestions[1].subQues}/>
             </div>
             {/* Question 3 */}
-            <LongQuestion QuesNo="1" Text={longQuestions[0].ques} MM={longQuestions[0].maxMarks} Unit={longQuestions[0].unit} BTL={longQuestions[0].bloomLevel} CO={longQuestions[0].co} />
+            <LongQuestion QuesNo="3" Text={longQuestions[2].ques} MM={longQuestions[2].maxMarks} Unit={longQuestions[2].unit} BTL={longQuestions[2].bloomLevel} CO={longQuestions[0].co} SubQues={longQuestions[2].subQues}/>
             <h1 className="text-center font-semibold text-base">OR</h1>
 
             {/* Question 4 */}
-            <LongQuestion QuesNo="1" Text={longQuestions[0].ques} MM={longQuestions[0].maxMarks} Unit={longQuestions[0].unit} BTL={longQuestions[0].bloomLevel} CO={longQuestions[0].co} />
+            <LongQuestion QuesNo="4" Text={longQuestions[3].ques} MM={longQuestions[3].maxMarks} Unit={longQuestions[3].unit} BTL={longQuestions[3].bloomLevel} CO={longQuestions[3].co} SubQues={longQuestions[3].subQues}/>
           </>
         )}
       </div>

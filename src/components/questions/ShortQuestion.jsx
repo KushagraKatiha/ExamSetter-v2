@@ -8,7 +8,7 @@ function ShortQuestion({ QuesNo, Text, MM = 2, Unit, BTL, CO, ImageSrc = null })
             <div className="flex flex-col">
                 <div className="flex">
                     <span className="font-medium text-xs mr-1">{QuesNo}.</span>
-                    <p className="border-2 border-red-600 w-[550px] text-xs text-justify">
+                    <p className="overflow-hidden border-2 border-red-600 w-[550px] text-xs text-justify">
                         {Text}
                     </p>
                 </div>
