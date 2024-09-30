@@ -490,7 +490,7 @@ const handleImageChange = (e) => {
                       </div>
                     )}
                   </div>
-                <div id="editor" className=' bg-black rounded-lg border-2 border-[#9c36b5] p-2'>
+                <div id="editor" className='h-fit bg-black rounded-lg border-2 border-[#9c36b5] p-2'>
                   <TextEditor/>
                 </div>
 

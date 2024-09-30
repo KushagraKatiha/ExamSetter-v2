@@ -1,28 +1,47 @@
-import React, { useState, useRef, useMemo } from 'react'
-import JoditEditor from 'jodit-react';
+import React, { useState, useRef } from 'react';
 
+const TextEditor = ({ onContentChange }) => {
+  const editorRef = useRef(null);
+  const [editorContent, setEditorContent] = useState('<p>Start typing here...</p>');
 
-function TextEditor() {
+  const handleCommand = (command) => {
+    document.execCommand(command, false, null);
+  };
 
-    const editor = useRef(null)
-    const [content, setContent] = useState('')
-    const config = useMemo(() => ({
-        readonly: false,
-        toolbarButtonSize: 'medium',
-        placeholder: 'Type here...',
-        theme: 'dark',
-    }), [])
+  const handleInput = () => {
+    const htmlContent = editorRef.current.innerHTML;
+    setEditorContent(htmlContent);
+    onContentChange(htmlContent);  // Send updated HTML content to parent
+  };
 
-    return (
-        <JoditEditor
-            ref={editor}
-            value={content}
-            config={config}
-            tabIndex={1} // tabIndex of textarea
-            onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-            onChange={newContent => { }}
-        />
-    );
-}
+  return (
+    <div className='bg-white'>
+      {/* Toolbar */}
+      <div style={{ marginBottom: '10px' }}>
+        <button onClick={() => handleCommand('bold')}><b>B</b></button>
+        <button onClick={() => handleCommand('italic')}><i>I</i></button>
+        <button onClick={() => handleCommand('insertUnorderedList')}>• Bullets</button>
+        <button onClick={() => handleCommand('outdent')}>Outdent</button>
+        <button onClick={() => handleCommand('indent')}>Indent</button>
+      </div>
 
-export default TextEditor
+      {/* Editable Content */}
+      <div
+        className='bg-white'
+        ref={editorRef}
+        contentEditable={true}
+        dangerouslySetInnerHTML={{ __html: editorContent }}
+        onInput={handleInput}
+        style={{
+          minHeight: '200px',
+          border: '1px solid #ccc',
+          padding: '10px',
+          outline: 'none',
+          whiteSpace: 'pre-wrap',
+        }}
+      />
+    </div>
+  );
+};
+
+export default TextEditor;
