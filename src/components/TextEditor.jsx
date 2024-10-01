@@ -6,7 +6,7 @@ export default function TextEditor({defaultValue = '', label}) {
     <div className='w-full'>
     {label && <label className='inline-block mb-1 pl-1'>{label}</label>}   
         <Editor
-        apiKey='46lmnc0xujc401s3e3zk2uym82cfrvhukj4b1qa8r16t13r9'
+        apiKey={import.meta.env.VITE_TINY_MCE_API}
         initialValue={defaultValue}
         init={{
             initialValue: defaultValue,
