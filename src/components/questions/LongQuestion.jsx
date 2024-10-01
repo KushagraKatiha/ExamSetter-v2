@@ -19,7 +19,7 @@ function LongQuestion({ QuesNo, Text, MM = 10, Unit, BTL, CO, ImageSrc = null, S
                   Unit={sub.unit}
                   BTL={sub.bloomLevel}
                   CO={sub.co}
-                  ImageSrc={sub.Image}
+                  ImageSrc={sub.image}
                 />
               ))}
             </div>

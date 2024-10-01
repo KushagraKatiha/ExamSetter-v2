@@ -1,97 +1,11 @@
 import React from 'react'
-import { LongQuestion, ShortQuestion, ShortQuestionHeading, TestPaperHeader } from './index.js'
+import {longQuestions, shortQuestions, LongQuestion, ShortQuestion, ShortQuestionHeading, TestPaperHeader } from './index.js'
+
+
 function TestPaper() {
-
-  const longQuestions = [
-    {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1",
-      subQues: [{
-        ques: "What is Data Mining?",
-        image: "",
-        unit: "Unit 1",
-        bloomLevel: "3",
-        co: "CO1"
-      }, {
-        ques: "What is Data Warehousing dfdfdfddddddddddd ddddddddd ddddddddddd dddddddddddddd dddddddddddd dddddddddddddddddd",
-        image: "",
-        unit: "Unit 1",
-        bloomLevel: "3",
-        co: "CO1"
-      }]
-    },
-    {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-  ]
-
-  const shortQuestions = [
-    {
-      ques: "These are short questions with a lot of text which is overflowing dfdfdfdfdfdfdfdfdfdfdfdfdfdfddfdf I dont not know what to do with this but I need to fix it any how",
-      unit: "Unit 1",
-      image: "https://images.pexels.com/photos/28178064/pexels-photo-28178064/free-photo-of-a-woman-in-white-dress-standing-in-front-of-a-glass-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "These are short questions with a lot of text which is overflowing dfdfdfdfdfdfdfdfdfdfdfdfdfdfddfdf I dont not know what to do with this but I need to fix it any how",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "These are short questions with a lot of text which is overflowing dfdfdfdfdfdfdfdfdfdfdfdfdfdfddfdf I dont not know what to do with this but I need to fix it any how",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "These are all short questions",
-      unit: "1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "These are all short questions",
-      image: "https://images.pexels.com/photos/28178064/pexels-photo-28178064/free-photo-of-a-woman-in-white-dress-standing-in-front-of-a-glass-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "These are all short questions",
-
-      unit: "Unit 1",
-      bloomLevel: "3",
-      image: "https://images.pexels.com/photos/28178064/pexels-photo-28178064/free-photo-of-a-woman-in-white-dress-standing-in-front-of-a-glass-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      co: "CO1"
-    },
-  ]
-
   return (
-    <div className='w-full border-black border-2 h-full'>
-      <div className="px-12 bg-white">
+    <div className='border-black border-2'>
+      <div className="px-12 bg-white h-[1500px] overflow-y-scroll">
         <TestPaperHeader />
 
         {/* Question Paper */}
@@ -121,19 +35,19 @@ function TestPaper() {
             {/* Questions */}
             {/* Question 1 */}
             <div>
-              <LongQuestion QuesNo="1" Text={longQuestions[0].ques} MM={longQuestions[0].maxMarks} Unit={longQuestions[0].unit} BTL={longQuestions[0].bloomLevel} CO={longQuestions[0].co} SubQues={longQuestions[0].subQues}/>
+              <LongQuestion QuesNo="1" Text={longQuestions[0].ques} MM={longQuestions[0].maxMarks} Unit={longQuestions[0].unit} BTL={longQuestions[0].bloomLevel} CO={longQuestions[0].co} SubQues={longQuestions[0].subQues} ImageSrc={longQuestions[0].image}/>
             </div>
             <h1 className="text-center font-semibold text-base">OR</h1>
             {/* Question 2 */}
             <div>
-              <LongQuestion QuesNo="2" Text={longQuestions[1].ques} MM={longQuestions[1].maxMarks} Unit={longQuestions[1].unit} BTL={longQuestions[1].bloomLevel} CO={longQuestions[0].co} SubQues={longQuestions[1].subQues}/>
+              <LongQuestion QuesNo="2" Text={longQuestions[1].ques} MM={longQuestions[1].maxMarks} Unit={longQuestions[1].unit} BTL={longQuestions[1].bloomLevel} CO={longQuestions[0].co} SubQues={longQuestions[1].subQues} ImageSrc={longQuestions[1].image}/>
             </div>
             {/* Question 3 */}
-            <LongQuestion QuesNo="3" Text={longQuestions[2].ques} MM={longQuestions[2].maxMarks} Unit={longQuestions[2].unit} BTL={longQuestions[2].bloomLevel} CO={longQuestions[0].co} SubQues={longQuestions[2].subQues}/>
+            <LongQuestion QuesNo="3" Text={longQuestions[2].ques} MM={longQuestions[2].maxMarks} Unit={longQuestions[2].unit} BTL={longQuestions[2].bloomLevel} CO={longQuestions[0].co} SubQues={longQuestions[2].subQues} ImageSrc={longQuestions[2].image}/>
             <h1 className="text-center font-semibold text-base">OR</h1>
 
             {/* Question 4 */}
-            <LongQuestion QuesNo="4" Text={longQuestions[3].ques} MM={longQuestions[3].maxMarks} Unit={longQuestions[3].unit} BTL={longQuestions[3].bloomLevel} CO={longQuestions[3].co} SubQues={longQuestions[3].subQues}/>
+            <LongQuestion QuesNo="4" Text={longQuestions[3].ques} MM={longQuestions[3].maxMarks} Unit={longQuestions[3].unit} BTL={longQuestions[3].bloomLevel} CO={longQuestions[3].co} SubQues={longQuestions[3].subQues} ImageSrc={longQuestions[3].image}/>
           </>
         )}
       </div>
