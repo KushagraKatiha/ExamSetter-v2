@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import TextEditor from './TextEditor'
 import Select from './Select';
+import {
+  courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions
+} from './index'
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function SetQuestionPaper() {
-  
+
+  const dispatch = useDispatch();
+
   const [image, setImage] = useState(null);
   const [addImage, setAddImage] = useState(false);
   const [questionText, setQuestionText] = useState(null)
@@ -50,19 +57,6 @@ function SetQuestionPaper() {
   useEffect(() => {
     localStorage.setItem('shortQuestions', JSON.stringify(shortQuestions));
   }, [shortQuestions]);
-
-  // Print long questions and short questions from local storage when the component mounts
-
-  // Save Exams Details into the local storage
-  useEffect(() => {
-    localStorage.setItem('examName', JSON.stringify(examName));
-    localStorage.setItem('selectedPrograms', JSON.stringify(selectedPrograms));
-    localStorage.setItem('semester', JSON.stringify(semester));
-    localStorage.setItem('year', JSON.stringify(year));
-    localStorage.setItem('courseCode', JSON.stringify(courseCode));
-    localStorage.setItem('courseName', JSON.stringify(courseName));
-    localStorage.setItem('otherProgram', JSON.stringify(otherProgram));
-  }, [examName, selectedPrograms, semester, year, courseCode, courseName, otherProgram]);
 
   const handleAddImage = () => {
     setAddImage(!addImage);
@@ -230,199 +224,93 @@ const handleImageChange = (e) => {
     alert('Sub Question 2 added')
   }
 
+  // const handleAddQuestion = () => {
+  //   // Check if the question type is not selected
+  //   if (questionType === 'choose') {
+  //     alert('Please select the question type');
+  //     return; // Exit the function early
+  //   }
+
+  //   // Check if unit, bloomLevel, and co are not selected
+  //   if (unit === '-' || bloomLevel === '-' || co === '-') {
+  //     alert('Please select Unit, Bloom\'s Level, and Course Outcome.');
+  //     return; // Exit the function early
+  //   }
+
+  //   if (
+  //     (questionType === 'short' && shortQuestions.length < 8) ||
+  //     (questionType === 'long' && longQuestions.length < 4)
+  //   ) {
+  //     const marks = questionType === 'long' ? 10 : 2;
+  //     // check if long question has sub question
+  //     if (longQuestionSubType === '2') {
+  //       if (Object.keys(longQuestion).length != 2) {
+  //         alert('Please enter both sub questions');
+  //         return; // Exit the function early
+  //       }
+  //       setLongQuestions((prevLongQuestions) => [...prevLongQuestions, longQuestion]);
+  //       alert(`${longQuestions.length + 1} Long question added`);
+  //       setLongQuestion({});
+  //       setLongQuestionSubType(1);
+  //       setSubQuestion1(null);
+  //       setSubQuestion2(null);
+  //       setQuestionType('choose');
+  //       setUnit('');
+  //       setBloomLevel('');
+  //       setCo('');
+  //       setQuestionText(null);
+  //       setImage(null);   // Clear the selected image
+  //       setSelectedImage(null)
+  //       setAddImage(false);
+  //       return;
+  //     }
+
+  //     // Check if the question is not empty
+  //     if (questionText == null || questionText === '<p><br></p>') {
+  //       alert('Please enter the question');
+  //       return; // Exit the function early
+  //     }
+
+  //     const question = {
+  //       ques: questionText, // Set the ques property to the content from the Froala Editor
+  //       maxMarks: marks,
+  //       unit: unit,
+  //       bloomLevel: bloomLevel,
+  //       co: co,
+  //       image: image ? URL.createObjectURL(image) : null,
+  //     };
+  //     if (questionType === 'long') {
+  //       setLongQuestions((prevLongQuestions) => [...prevLongQuestions, question]);
+  //       alert(`${longQuestions.length + 1} Long question added`);
+  //     } else if (questionType === 'short') {
+  //       setShortQuestions([...shortQuestions, question]);
+  //       alert(`${shortQuestions.length + 1} Short question added`);
+  //     }
+  //     setQuestionType('choose');
+  //     setUnit('');
+  //     setBloomLevel('');
+  //     setCo('');
+  //     setQuestionText(null);
+  //     setImage(null);   // Clear the selected image
+  //     setSelectedImage(null)
+  //     setAddImage(false);
+  //   } else {
+  //     alert('You can only add 8 short and 4 long questions');
+  //   }
+  // };
+
   const handleAddQuestion = () => {
-    // Check if the question type is not selected
-    if (questionType === 'choose') {
-      alert('Please select the question type');
-      return; // Exit the function early
-    }
+    const question = {
+      ques: questionText, // Set the ques property to the content from the Froala Editor
+      maxMarks: 2,
+      unit: unit,
+      bloomLevel: bloomLevel,
+      co: co,
+      image: image ? URL.createObjectURL(image) : null,
+    };
 
-    // Check if unit, bloomLevel, and co are not selected
-    if (unit === '-' || bloomLevel === '-' || co === '-') {
-      alert('Please select Unit, Bloom\'s Level, and Course Outcome.');
-      return; // Exit the function early
-    }
-
-    if (
-      (questionType === 'short' && shortQuestions.length < 8) ||
-      (questionType === 'long' && longQuestions.length < 4)
-    ) {
-      const marks = questionType === 'long' ? 10 : 2;
-      // check if long question has sub question
-      if (longQuestionSubType === '2') {
-        if (Object.keys(longQuestion).length != 2) {
-          alert('Please enter both sub questions');
-          return; // Exit the function early
-        }
-        setLongQuestions((prevLongQuestions) => [...prevLongQuestions, longQuestion]);
-        alert(`${longQuestions.length + 1} Long question added`);
-        setLongQuestion({});
-        setLongQuestionSubType(1);
-        setSubQuestion1(null);
-        setSubQuestion2(null);
-        setQuestionType('choose');
-        setUnit('');
-        setBloomLevel('');
-        setCo('');
-        setQuestionText(null);
-        setImage(null);   // Clear the selected image
-        setSelectedImage(null)
-        setAddImage(false);
-        return;
-      }
-
-      // Check if the question is not empty
-      if (questionText == null || questionText === '<p><br></p>') {
-        alert('Please enter the question');
-        return; // Exit the function early
-      }
-
-      const question = {
-        ques: questionText, // Set the ques property to the content from the Froala Editor
-        maxMarks: marks,
-        unit: unit,
-        bloomLevel: bloomLevel,
-        co: co,
-        image: image ? URL.createObjectURL(image) : null,
-      };
-      if (questionType === 'long') {
-        setLongQuestions((prevLongQuestions) => [...prevLongQuestions, question]);
-        alert(`${longQuestions.length + 1} Long question added`);
-      } else if (questionType === 'short') {
-        setShortQuestions([...shortQuestions, question]);
-        alert(`${shortQuestions.length + 1} Short question added`);
-      }
-      setQuestionType('choose');
-      setUnit('');
-      setBloomLevel('');
-      setCo('');
-      setQuestionText(null);
-      setImage(null);   // Clear the selected image
-      setSelectedImage(null)
-      setAddImage(false);
-    } else {
-      alert('You can only add 8 short and 4 long questions');
-    }
-  };
-
-  const questionTypeOptions = [
-    {
-      value: '-',
-      fullName: 'Choose'
-    },
-    {
-      value: 'short',
-      fullName: 'Short',
-    },
-    {
-      value: 'long',
-      fullName: 'Long',
-    },
-  ]
-
-  const longQuestionsSubTypeOptions = [
-    {
-      value: '-',
-      fullName: 'Choose'
-    },
-    {
-      value: '1',
-      fullName: 'No',
-    },
-    {
-      value: '2',
-      fullName: 'Yes',
-    },
-  ]
-
-  const unitOptions = [
-    {
-      value: '-',
-      fullName: 'Choose'
-    },
-    {
-      value: '1',
-      fullName: '1',
-    },
-    {
-      value: '2',
-      fullName: '2',
-    },
-    {
-      value: '3',
-      fullName: '3',
-    },
-    {
-      value: '4',
-      fullName: '4',
-    },
-    {
-      value: '5',
-      fullName: '5',
-    },
-  ]
-
-  const bloomLevelOptions = [
-    {
-      value: '-',
-      fullName: 'Choose'
-    },
-    {
-      value: '1',
-      fullName: '1',
-    },
-    {
-      value: '2',
-      fullName: '2',
-    },
-    {
-      value: '3',
-      fullName: '3',
-    },
-    {
-      value: '4',
-      fullName: '4',
-    },
-    {
-      value: '5',
-      fullName: '5',
-    },
-    {
-      value: '6',
-      fullName: '6',
-    },
-  ]
-
-  const courseOutcomeOptions = [
-    {
-      value: '-',
-      fullName: 'Choose'
-    },
-    {
-      value: '1',
-      fullName: '1',
-    },
-    {
-      value: '2',
-      fullName: '2',
-    },
-    {
-      value: '3',
-      fullName: '3',
-    },
-    {
-      value: '4',
-      fullName: '4',
-    },
-    {
-      value: '5',
-      fullName: '5',
-    },
-    {
-      value: '6',
-      fullName: '6',
-    },
-  ]
+    dispatch((setLongQuestion(question)));
+  }
 
   return (
     <div>
@@ -491,7 +379,7 @@ const handleImageChange = (e) => {
                     )}
                   </div>
                 <div id="editor" className='h-fit bg-black rounded-lg border-2 border-[#9c36b5] p-2'>
-                  <TextEditor label='Content: '/>
+                  <TextEditor/>
                 </div>
 
                 {/* Container to put add button*/}
@@ -524,7 +412,7 @@ const handleImageChange = (e) => {
                     )}
                   </div>
                 <div id="editor" className=' bg-black rounded-lg border-2 border-[#9c36b5] p-2'>
-                <TextEditor label='Content: '/>
+                <TextEditor/>
                 </div>
 
                 {/* Container to put add button*/}
@@ -562,7 +450,7 @@ const handleImageChange = (e) => {
                   )}
                 </div>
               <div id="editor" className=' bg-black rounded-lg border-2 border-[#9c36b5] p-2'>
-              <TextEditor label='Content: '/>
+              <TextEditor/>
               </div>
 
               {/* Container to put add and done buttons */}

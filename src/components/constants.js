@@ -203,4 +203,123 @@ const semesterList = [
     { value: 'VIII', fullName: 'VIII' },
 ]
 
-export {longQuestions, shortQuestions, courses, examList, semesterList };
+const questionTypeOptions = [
+  {
+    value: '-',
+    fullName: 'Choose'
+  },
+  {
+    value: 'short',
+    fullName: 'Short',
+  },
+  {
+    value: 'long',
+    fullName: 'Long',
+  },
+]
+
+const longQuestionsSubTypeOptions = [
+  {
+    value: '-',
+    fullName: 'Choose'
+  },
+  {
+    value: '1',
+    fullName: 'No',
+  },
+  {
+    value: '2',
+    fullName: 'Yes',
+  },
+]
+
+const unitOptions = [
+  {
+    value: '-',
+    fullName: 'Choose'
+  },
+  {
+    value: '1',
+    fullName: '1',
+  },
+  {
+    value: '2',
+    fullName: '2',
+  },
+  {
+    value: '3',
+    fullName: '3',
+  },
+  {
+    value: '4',
+    fullName: '4',
+  },
+  {
+    value: '5',
+    fullName: '5',
+  },
+]
+
+const bloomLevelOptions = [
+  {
+    value: '-',
+    fullName: 'Choose'
+  },
+  {
+    value: '1',
+    fullName: '1',
+  },
+  {
+    value: '2',
+    fullName: '2',
+  },
+  {
+    value: '3',
+    fullName: '3',
+  },
+  {
+    value: '4',
+    fullName: '4',
+  },
+  {
+    value: '5',
+    fullName: '5',
+  },
+  {
+    value: '6',
+    fullName: '6',
+  },
+]
+
+const courseOutcomeOptions = [
+  {
+    value: '-',
+    fullName: 'Choose'
+  },
+  {
+    value: '1',
+    fullName: '1',
+  },
+  {
+    value: '2',
+    fullName: '2',
+  },
+  {
+    value: '3',
+    fullName: '3',
+  },
+  {
+    value: '4',
+    fullName: '4',
+  },
+  {
+    value: '5',
+    fullName: '5',
+  },
+  {
+    value: '6',
+    fullName: '6',
+  },
+]
+
+export {longQuestions, shortQuestions, courses, examList, semesterList, courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions};

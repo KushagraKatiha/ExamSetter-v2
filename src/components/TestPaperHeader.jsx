@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux';
 function TestPaperHeader() {
     const { examName, selectedPrograms, semester, courseCode, courseName, otherProgram, teacherName, teacherId } = useSelector(state => state.details.questionPaperDetails);
 
-    console.log(useSelector(state => state.details))
-
     const [year, setYear] = useState('');
 
     let academicSession;
