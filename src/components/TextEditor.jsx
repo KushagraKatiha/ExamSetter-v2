@@ -4,7 +4,6 @@ import { Editor } from '@tinymce/tinymce-react';
 export default function TextEditor({ label, value, setValue}) {
 
   const handleEditorChange = (content) => {
-    console.log(content);
     setValue(content);
   };
 

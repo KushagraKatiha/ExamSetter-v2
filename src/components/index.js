@@ -5,7 +5,7 @@ import Button from "./Button";
 import TestPaper from "./TestPaper";
 import TextEditor from "./TextEditor";
 import Select from "./Select";
-import {longQuestions, shortQuestions, courses, examList, semesterList, courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions} from './constants'
+import {courses, examList, semesterList, courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions} from './constants'
 import TestPaperDetails from "./TestPaperDetails";
 import SetQuestionPaper from "./SetQuestionPaper";
 import Bloom from "./Bloom";
@@ -18,4 +18,4 @@ import LongQuestion from "./questions/LongQuestion";
 import SubLongQuestion from "./questions/SubLongQuestion";
 import ShortQuestionHeading from "./questions/ShortQuestionHeading";
 
-export {longQuestions, shortQuestions, courses, ShortQuestionHeading, LongQuestion, SubLongQuestion, ShortQuestion, Image, Banner, Credits, Input, Button, TestPaper, TextEditor, Select, TestPaperDetails, SetQuestionPaper, Bloom, TestPaperHeader, examList, semesterList, courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions };
+export {courses, ShortQuestionHeading, LongQuestion, SubLongQuestion, ShortQuestion, Image, Banner, Credits, Input, Button, TestPaper, TextEditor, Select, TestPaperDetails, SetQuestionPaper, Bloom, TestPaperHeader, examList, semesterList, courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions };

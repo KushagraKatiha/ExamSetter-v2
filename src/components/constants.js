@@ -1,3 +1,4 @@
+
 const courses = [
     {   
         value: 'B.Tech CSE',
@@ -88,104 +89,6 @@ const courses = [
         fullName: 'M.Sc.-Data Science (From Session 2023-24 Onwards)'
     }
 ];
-
-const longQuestions = [
-    {
-      subQues: [{
-        ques: "What is Data Mining?",
-        image: "",
-        unit: "Unit 1",
-        bloomLevel: "3",
-        co: "CO1"
-      }, {
-        ques: "What is Data Warehousing dfdfdfddddddddddd ddddddddd ddddddddddd dddddddddddddd dddddddddddd dddddddddddddddddd",
-        image: "",
-        unit: "Unit 1",
-        bloomLevel: "3",
-        co: "CO1"
-      }]
-    },
-    {
-      ques: "Write a short note on the following:dfdfdfdd dfd df df dfdfdfdf dfdfdf dfdfd dfdfdf dfd <br> a. Data Mining <br> b. Data Warehousing",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1",
-      image: "https://images.pexels.com/photos/28178064/pexels-photo-28178064/free-photo-of-a-woman-in-white-dress-standing-in-front-of-a-glass-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "Write a short note on the following: <br> a. Data Mining <br> b. Data Warehousing",
-      image: "",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-  ]
-
-  const shortQuestions = [
-    {
-      ques: "These are short questions with a lot of text which is overflowing dfdfdfdfdfdfdfdfdfdfdfdfdfdfddfdf I dont not know what to do with this but I need to fix it any how",
-      unit: "Unit 1",
-      image: "https://images.pexels.com/photos/28178064/pexels-photo-28178064/free-photo-of-a-woman-in-white-dress-standing-in-front-of-a-glass-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "These are short questions with a lot of text which is overflowing dfdfdfdfdfdfdfdfdfdfdfdfdfdfddfdf I dont not know what to do with this but I need to fix it any how",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "These are short questions with a lot of text which is overflowing dfdfdfdfdfdfdfdfdfdfdfdfdfdfddfdf I dont not know what to do with this but I need to fix it any how",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "These are all short questions",
-      unit: "1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "These are all short questions",
-      image: "https://images.pexels.com/photos/28178064/pexels-photo-28178064/free-photo-of-a-woman-in-white-dress-standing-in-front-of-a-glass-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      unit: "Unit 1",
-      bloomLevel: "3",
-      co: "CO1"
-    },
-    {
-      ques: "These are all short questions",
-
-      unit: "Unit 1",
-      bloomLevel: "3",
-      image: "https://images.pexels.com/photos/28178064/pexels-photo-28178064/free-photo-of-a-woman-in-white-dress-standing-in-front-of-a-glass-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      co: "CO1"
-    },
-    {
-      ques: "These are all short questions",
-
-      unit: "Unit 1",
-      bloomLevel: "3",
-      image: "https://images.pexels.com/photos/28178064/pexels-photo-28178064/free-photo-of-a-woman-in-white-dress-standing-in-front-of-a-glass-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      co: "CO1"
-    },
-    {
-      ques: "These are all short questions",
-
-      unit: "Unit 1",
-      bloomLevel: "3",
-      image: "https://images.pexels.com/photos/28178064/pexels-photo-28178064/free-photo-of-a-woman-in-white-dress-standing-in-front-of-a-glass-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      co: "CO1"
-    },
-  ]
 
   const examList = [
     { value: 'Class Test First', fullName: 'Class Test First' },
@@ -322,4 +225,4 @@ const courseOutcomeOptions = [
   },
 ]
 
-export {longQuestions, shortQuestions, courses, examList, semesterList, courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions};
+export {courses, examList, semesterList, courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions};

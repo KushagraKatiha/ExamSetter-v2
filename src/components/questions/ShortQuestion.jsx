@@ -1,16 +1,16 @@
 import React from 'react'
 import { Image } from '../index'
+import parse from 'html-react-parser'
 
 function ShortQuestion({ QuesNo, Text, MM = 2, Unit, BTL, CO, ImageSrc = null }) {
     return (
-
         <div className="w-full flex mb-1 border-2 border-blue-600">
             <div className="flex flex-col">
                 <div className="flex">
                     <span className="font-medium text-xs mr-1">{QuesNo}.</span>
-                    <p className="overflow-hidden border-2 border-red-600 w-[550px] text-xs text-justify">
-                        {Text}
-                    </p>
+                    <div className="overflow-hidden border-2 border-red-600 w-[550px] text-xs text-justify">
+                       {parse(Text)}
+                    </div>
                 </div>
                 {ImageSrc && (
                     <div className="mr-auto ml-auto h-auto w-1/2">

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Image, SubLongQuestion } from '../index';
+import parse from 'html-react-parser'
 
-function LongQuestion({ QuesNo, Text, MM = 10, Unit, BTL, CO, ImageSrc = null, SubQues = null }) {
+function LongQuestion({ QuesNo=null, Text=null, MM = 10, Unit=null, BTL=null, CO=null, ImageSrc = null, SubQues = null }) {
   return (
     <div className="w-full">
       {SubQues ? (
@@ -30,9 +31,9 @@ function LongQuestion({ QuesNo, Text, MM = 10, Unit, BTL, CO, ImageSrc = null, S
           <div className="flex flex-col">
             <div className="flex text-xs">
               <span className="font-medium text-xs mr-1">{QuesNo}.</span>
-              <p className="overflow-hidden border-2 border-red-600 w-[550px] text-xs text-justify">
-                {Text}
-              </p>
+              <div className="overflow-hidden border-2 border-red-600 w-[550px] text-xs text-justify">
+                {parse(Text)}
+              </div>
             </div>
             {ImageSrc && (
               <div className="mr-auto ml-auto h-auto w-1/2">
