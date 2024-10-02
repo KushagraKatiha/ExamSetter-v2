@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-export default function TextEditor({ defaultValue = '', label }) {
-  const [content, setContent] = useState(defaultValue);
+export default function TextEditor({ label, value, setValue}) {
 
-  const handleEditorChange = (content, editor) => {
-    setContent(content);  // Update the state with the new content
-    console.log('Content was updated:', content);
+  const handleEditorChange = (content) => {
+    console.log(content);
+    setValue(content);
   };
 
   return (
@@ -14,9 +13,10 @@ export default function TextEditor({ defaultValue = '', label }) {
       {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
       <Editor
         apiKey={import.meta.env.VITE_TINY_MCE_API}
-        initialValue={defaultValue}
-        value={content} // Ensure the editor value is controlled
+        value={value} // Ensure the editor value is controlled
         init={{
+          content_css: 'writer',
+          placeholder: 'Type here...',
           height: 300,
           menubar: true,
           plugins: [
@@ -41,7 +41,7 @@ export default function TextEditor({ defaultValue = '', label }) {
             'undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic | alignright alignjustify | bullist numlist outdent indent | removeformat | help',
           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
         }}
-        onEditorChange={handleEditorChange} // Attach the handler to onEditorChange
+        onEditorChange={handleEditorChange} 
       />
     </div>
   );
