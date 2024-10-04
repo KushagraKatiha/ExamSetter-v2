@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-function TestPaperHeader({ textColor, borderColor }) {
+function TestPaperHeader({ textColor='text-black', borderColor='border-black' }) {
     const { examName, selectedPrograms, semester, courseCode, courseName, otherProgram, teacherName, teacherId } = useSelector(state => state.details.questionPaperDetails);
 
     const [year, setYear] = useState('');
@@ -36,52 +36,52 @@ function TestPaperHeader({ textColor, borderColor }) {
             </div>
 
             {/* College Name, Exam Name, Program Name */}
-            <div className={`${textColor} mt-4 text-black flex flex-col items-center justify-center`}>
-                <h1 className="font-bold text-base text-center">
+            <div className={`${textColor} mt-4 flex flex-col items-center justify-center`}>
+                <h1 className={`${textColor} font-bold text-base text-center`}>
                     College of Computing Sciences and Information Technology
                 </h1>
 
                 <h2
                     style={{ fontStyle: "italic" }}
-                    className="text-base font-extrabold"
+                    className={`${textColor} text-base font-extrabold`}
                 >
                     {examName && examName.toUpperCase()}
                 </h2>
-                <h2 className="text-xs">
+                <h2 className={`${textColor} text-xs`}>
                     Program Name: {selectedPrograms && selectedPrograms.length > 0 && selectedPrograms.join('/')}
                     {otherProgram ? `/${otherProgram.toUpperCase()}` : ''}
                 </h2>
             </div>
 
             {/* Exam Details Table */}
-            <div className="mt-1 text-black flex flex-col items-center text-xs">
-                <table className="border-black border-2 w-4/5">
+            <div className="mt-1 flex flex-col items-center text-xs">
+                <table className={`${borderColor} border-2 w-4/5`}>
                     <tbody>
-                        <tr className={`${borderColor} border-black border-2`}>
-                            <td className="px-2 text-xs border-black border-2">Year: {year}</td>
-                            <td className="px-2 text-xs border-black border-2">Semester: {semester}</td>
-                            <td className="px-2 text-xs border-black border-2">Academic Session: {academicSession}</td>
+                        <tr className={`${borderColor} border-2`}>
+                            <td className={`${borderColor} px-2 text-xs  border-2`}>Year: {year}</td>
+                            <td className={`${borderColor} px-2 text-xs  border-2`}>Semester: {semester}</td>
+                            <td className={`${borderColor} px-2 text-xs  border-2`}>Academic Session: {academicSession}</td>
                         </tr>
-                        <tr className="border-black border-2">
-                            <td colSpan={2} className="px-2 border-black border-2">
+                        <tr className={`${borderColor} border-2`}>
+                            <td colSpan={2} className={`${borderColor} px-2 bborder-2`}>
                                 Course Code: {courseCode && courseCode.toUpperCase()}
                             </td>
-                            <td className="px-2 border-black border-2">
+                            <td className={`${borderColor} px-2 border-2`}>
                                 Course Name: {courseName && courseName.toUpperCase()}
                             </td>
                         </tr>
-                        <tr className="border-black border-2">
-                            <td colSpan={2} className="px-2 border-black border-2">
+                        <tr className={`${borderColor} border-2`}>
+                            <td colSpan={2} className={`${borderColor} px-2 border-2`}>
                                 Duration: 90 minutes
                             </td>
-                            <td className="px-2 border-black border-2">Max Marks: 30</td>
+                            <td className={`${borderColor} px-2 border-2`}>Max Marks: 30</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             {/* Bloom Level Details */}
-            <p className="text-xs font-bold text-black text-center">
+            <p className={`${textColor} text-xs font-bold text-center`}>
                 *Bloom Level{" "}
                 {`{1-Remembering, 2-Understanding, 3-Applying, 4-Analyzing, 5-Evaluating, 6-Creating}`}
             </p>

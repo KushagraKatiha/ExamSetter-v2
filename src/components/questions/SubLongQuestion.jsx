@@ -1,15 +1,15 @@
-import React from 'react'
-import { Image } from '../index'
-import parse from 'html-react-parser'
+import React from 'react';
+import { Image } from '../index';
+import parse from 'html-react-parser';
 
-function SubLongQuestion({ QuesNo, Text, MM = 5, Unit, BTL, CO, ImageSrc = null }) {
+function SubLongQuestion({ QuesNo, Text, MM = 5, Unit, BTL, CO, ImageSrc = null, textColor = 'text-black' }) {
   return (
     <>
-      <div className="w-full flex mb-1 ">
+      <div className={`w-full flex mb-1 ${textColor}`}>
         <div className="flex flex-col">
-          <div className="flex text-xs ">
-            <span className="font-medium text-xs mr-1">{QuesNo}</span>
-            <div className="overflow-hidden w-[546px] text-xs text-justify">
+          <div className={`flex text-xs ${textColor}`}>
+            <span className={`font-medium text-xs mr-1 ${textColor}`}>{QuesNo}</span>
+            <div className={`overflow-hidden w-[546px] text-xs text-justify ${textColor}`}>
               {parse(Text)}
             </div>
           </div>
@@ -19,7 +19,7 @@ function SubLongQuestion({ QuesNo, Text, MM = 5, Unit, BTL, CO, ImageSrc = null 
             </div>
           )}
         </div>
-        <div className="flex justify-between  w-[30%] ml-6 text-xs">
+        <div className={`flex justify-between w-[30%] ml-6 text-xs ${textColor}`}>
           <p className=''>{MM}</p>
           <p className=''>{Unit}</p>
           <p className=''>{BTL}</p>
@@ -27,7 +27,7 @@ function SubLongQuestion({ QuesNo, Text, MM = 5, Unit, BTL, CO, ImageSrc = null 
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default SubLongQuestion
+export default SubLongQuestion;

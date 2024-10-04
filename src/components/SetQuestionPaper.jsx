@@ -222,7 +222,7 @@ function SetQuestionPaper() {
         <Button label={!addImage ? 'Add Image' : 'Close'} onClick={handleAddImage} className="bg-[#111827] border-2 border-[#4b5563] text-white px-4 py-2 rounded-lg" />
 
         {addImage && (
-          <label className="custom-file-upload">
+          <label className="custom-file-upload text-white">
             Choose File
             <Input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
           </label>

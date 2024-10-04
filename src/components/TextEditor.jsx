@@ -37,7 +37,7 @@ export default function TextEditor({ label, value, setValue}) {
           ],
           toolbar:
             'undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic | alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:22px;background-color: #1f1f1f; color: #fff; }',
+          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:22px;background-color: #1f1f1f; color: #fff; } ::placeholder{color: #ffffff; opacity: 1} ::-ms-input-placeholder {color: red;}',
         }}
         onEditorChange={handleEditorChange} 
       />

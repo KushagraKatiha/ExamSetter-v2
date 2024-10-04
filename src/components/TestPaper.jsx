@@ -28,18 +28,18 @@ function TestPaper() {
   const shortQuestions = useSelector(state => state.shortQues);
   return (
     <div>
-      <div className="px-12 bg-white h-auto overflow-y-scroll no-scrollbar">
-        <TestPaperHeader textColour={'text-white'} />
+      <div className="px-12 h-auto overflow-y-scroll no-scrollbar">
+        <TestPaperHeader textColor={'text-white'} borderColor={'border-white'} />
 
         {/* Question Paper */}
-        <h1 className="mt-4 mb-2 text-black font-extrabold text-sm underline">
+        <h1 className="mt-4 mb-2 text-white font-extrabold text-sm underline">
           Attempt All Questions.
         </h1>
 
         {/* Short Questions */}
-        {shortQuestions.length > 0 && <ShortQuestionHeading />}
+        {shortQuestions.length > 0 && <ShortQuestionHeading textColor='text-white'/>}
         <div>
-          <h2 className="font-medium text-black text-sm underline mb-1 mt-2 ml-4">Attempt any five questions only.</h2>
+          <h2 className="font-medium text-white text-sm underline mb-1 mt-2 ml-4">Attempt any five questions only.</h2>
           {shortQuestions && shortQuestions.map((question, index) => (
             <ShortQuestion
               key={index}
@@ -49,6 +49,7 @@ function TestPaper() {
               BTL={question.bloomLevel}
               CO={question.co}
               ImageSrc={question.image}
+              textColor='text-white'
             />
           ))}
         </div>
@@ -56,7 +57,7 @@ function TestPaper() {
         {/* Long Questions */}
         {longQuestions.length > 0 && (
           <>
-            <div className="mt-6 ml-6 text-sm font-bold">
+            <div className="mt-6 ml-6 text-sm font-bold text-white">
               <h2>LONG QUESTIONS</h2>
             </div>
             <div>
@@ -71,6 +72,7 @@ function TestPaper() {
                     CO={question.co}
                     SubQues={question.subQues}
                     ImageSrc={question.image}
+                    textColor='text-white'
                   />
                   {index % 2 !== 0 && <h1 className="text-center font-semibold text-base">OR</h1>}
                 </div>
