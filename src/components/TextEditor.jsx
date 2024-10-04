@@ -14,7 +14,6 @@ export default function TextEditor({ label, value, setValue}) {
         apiKey={import.meta.env.VITE_TINY_MCE_API}
         value={value} // Ensure the editor value is controlled
         init={{
-          content_css: 'writer',
           placeholder: 'Type here...',
           height: 300,
           menubar: true,
@@ -38,7 +37,7 @@ export default function TextEditor({ label, value, setValue}) {
           ],
           toolbar:
             'undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic | alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:22px;background-color: #1f1f1f; color: #fff; }',
         }}
         onEditorChange={handleEditorChange} 
       />

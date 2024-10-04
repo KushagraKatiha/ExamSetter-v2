@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Select, courses, Input, Button, examList, semesterList } from './index'
-import { useDispatch, useSelector } from 'react-redux'
-import { editDetails, setDetails } from '../store/features/questionPaperDetails/detailsSlice'
+import React, { useState } from 'react';
+import { Select, courses, Input, Button, examList, semesterList } from './index';
+import { useDispatch, useSelector } from 'react-redux';
+import { editDetails, setDetails } from '../store/features/questionPaperDetails/detailsSlice';
 
 function TestPaperDetails() {
     const dispatch = useDispatch();
@@ -28,7 +28,6 @@ function TestPaperDetails() {
     };
 
     const handleSave = () => {
-
         if (semester === '' || examName === '' || courseCode === '' || courseName === '' || teacherName === '' || teacherId === '' || selectedPrograms.length === 0) {
             alert('Please fill all the exam details');
             return;
@@ -49,11 +48,10 @@ function TestPaperDetails() {
 
     const handleEdit = () => {
         dispatch(editDetails());
-    }
-
+    };
 
     return (
-        <div className='bg-[#a77ed6] mb-2'>
+        <div className='bg-[#121212] border-[#4b5563] border-2 p-4 rounded-lg mb-2'>
             <table className='w-full border-collapse'>
                 <tbody>
                     {/* First Row */}
@@ -65,6 +63,7 @@ function TestPaperDetails() {
                                 value={examName}
                                 onChange={(e) => setExamName(e.target.value)}
                                 disabled={disabled}
+                                className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
                         <td className='p-2'>
@@ -75,16 +74,18 @@ function TestPaperDetails() {
                                 value={teacherName}
                                 onChange={(e) => setTeacherName(e.target.value)}
                                 disabled={disabled}
+                                className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
                         <td className='p-2'>
                             <Input
                                 label='Teacher ID'
                                 type='text'
-                                placeholder='Id...'
+                                placeholder='ID...'
                                 value={teacherId}
                                 onChange={(e) => setTeacherId(e.target.value)}
                                 disabled={disabled}
+                                className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
                     </tr>
@@ -99,6 +100,7 @@ function TestPaperDetails() {
                                 value={courseName}
                                 onChange={(e) => setCourseName(e.target.value)}
                                 disabled={disabled}
+                                className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
                         <td className='p-2'>
@@ -109,6 +111,7 @@ function TestPaperDetails() {
                                 value={courseCode}
                                 onChange={(e) => setCourseCode(e.target.value)}
                                 disabled={disabled}
+                                className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
                         <td className='p-2'>
@@ -118,6 +121,7 @@ function TestPaperDetails() {
                                 value={semester}
                                 onChange={(e) => setSemester(e.target.value)}
                                 disabled={disabled}
+                                className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
                     </tr>
@@ -130,26 +134,27 @@ function TestPaperDetails() {
                                 label='Program Name'
                                 onChange={handleProgramSelection}
                                 disabled={disabled}
+                                className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
-                        <td className='p-2 content-end'>
+                        <td className='p-2'>
                             <Input
                                 type='text'
                                 placeholder='Other Program...'
+                                label='Other Program'
                                 value={otherProgram}
                                 onChange={(e) => setOtherProgram(e.target.value)}
                                 disabled={disabled}
+                                className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
-                        <td className='p-2 content-end'>
-                                <Button
-                                    className='w-full'
-                                    label= {disabled ? 'Edit' : 'Save'}
-                                    onClick={disabled ? handleEdit : handleSave}
-                                />
+                        <td className='p-2'>
+                            <Button
+                                className='bg-[#111827] border-2 border-[#4b5563] text-white px-4 py-2 rounded-lg mt-4'
+                                label={disabled ? 'Edit' : 'Save'}
+                                onClick={disabled ? handleEdit : handleSave}
+                            />
                         </td>
-
-
                     </tr>
 
                     {/* Fourth Row */}
@@ -157,7 +162,7 @@ function TestPaperDetails() {
                         <td colSpan="3" className='p-2'>
                             <div className='mt-1'>
                                 {selectedPrograms.map((program, index) => (
-                                    <div key={index} className='inline-block mb-1 bg-black rounded-lg px-2 py-1 mr-2'>
+                                    <div key={index} className='inline-block mb-1 bg-[#333333] rounded-lg px-2 py-1 mr-2'>
                                         <span className='text-white text-sm'>{program}</span>
                                         <button
                                             onClick={() => handleRemoveProgram(program)}
@@ -174,7 +179,7 @@ function TestPaperDetails() {
                 </tbody>
             </table>
         </div>
-    )
+    );
 }
 
 export default TestPaperDetails;

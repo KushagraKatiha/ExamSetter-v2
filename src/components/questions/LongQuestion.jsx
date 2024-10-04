@@ -6,7 +6,7 @@ function LongQuestion({ QuesNo=null, Text=null, MM = 10, Unit=null, BTL=null, CO
   return (
     <div className="w-full">
       {SubQues ? (
-        <div className="flex border-4 border-green-600">
+        <div className="flex ">
           {/* Sub Questions */}
           <span>{QuesNo}</span>
           <div className='flex w-full justify-between'>
@@ -27,11 +27,11 @@ function LongQuestion({ QuesNo=null, Text=null, MM = 10, Unit=null, BTL=null, CO
           </div>
         </div>
       ) : (
-        <div className="w-full flex mb-1 border-2 border-blue-600">
+        <div className="w-full flex mb-1 ">
           <div className="flex flex-col">
             <div className="flex text-xs">
               <span className="font-medium text-xs mr-1">{QuesNo}.</span>
-              <div className="overflow-hidden border-2 border-red-600 w-[550px] text-xs text-justify">
+              <div className="overflow-hidden w-[550px] text-xs text-justify">
                 {parse(Text)}
               </div>
             </div>
@@ -41,11 +41,11 @@ function LongQuestion({ QuesNo=null, Text=null, MM = 10, Unit=null, BTL=null, CO
               </div>
             )}
           </div>
-          <div className="flex border-2 justify-between border-pink-900 w-[30%] ml-6 text-xs">
-            <p className='border-2 border-green-800'>{MM}</p>
-            <p className='border-2 border-green-800'>{Unit}</p>
-            <p className='border-2 border-green-800'>{BTL}</p>
-            <p className='border-2 border-green-800'>{CO}</p>
+          <div className="flex justify-between w-[30%] ml-6 text-xs">
+            <p className=''>{MM}</p>
+            <p className=''>{Unit}</p>
+            <p className=''>{BTL}</p>
+            <p className=''>{CO}</p>
           </div>
         </div>
       )}

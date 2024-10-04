@@ -1,69 +1,46 @@
-import React, { useState, useEffect } from 'react'
-import TextEditor from './TextEditor'
-import Select from './Select';
+import React, { useState, useEffect } from 'react';
 import {
-  courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions
-} from './index'
+  courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions, Button, Input, TextEditor, Select, Image
+} from './index';
 import { useDispatch, useSelector } from 'react-redux';
 import { setShortQues } from '../store/features/questions/shortQuesSlice';
 import { setLongQues } from '../store/features/questions/longQuesSlice';
+import { FaTrash } from 'react-icons/fa'; 
 
 function SetQuestionPaper() {
-
   const dispatch = useDispatch();
-  // console.log('short question => ', useSelector(state => state.shortQues));
-  console.log('long question => ', useSelector(state => state.longQues));
 
-  // check if the four long questions are added
   const shortQuestionsLength = useSelector(state => state.shortQues.length);
   const longQuestionsLength = useSelector(state => state.longQues.length);
-  console.log('short question length=>', shortQuestionsLength);
-  console.log('long question length =>', longQuestionsLength);
 
-  const [subQues, setSubQues] = useState([])
-  // console.log('subQues => ', subQues);
-
-  const [image, setImage] = useState('');
+  const [subQues, setSubQues] = useState([]);
+  const [image, setImage] = useState(null);  
   const [addImage, setAddImage] = useState(false);
   const [questionText, setQuestionText] = useState('');
-
-  const [longQuestionSubType, setLongQuestionSubType] = useState("1")
-
-  const [selectedImage, setSelectedImage] = useState('');
+  const [longQuestionSubType, setLongQuestionSubType] = useState('1');
   const [questionType, setQuestionType] = useState('-');
   const [unit, setUnit] = useState('-');
   const [bloomLevel, setBloomLevel] = useState('-');
   const [co, setCo] = useState('-');
 
-  const handleAddImage = () => {
-    setAddImage(!addImage);
-    setSelectedImage(null);
-  };
-
+  const handleAddImage = () => setAddImage(!addImage);
   const handleRemoveImage = () => {
     setImage(null);
-    setSelectedImage(null);
-    setAddImage(false);
+    handleAddImage();
   };
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
     setImage(selectedImage);
-    setSelectedImage(selectedImage);
   };
 
   const checkConditions = () => {
-    if (questionType === '-') {
-      alert('Please select the question type');
-      return; // Exit the function early
+    if (questionType === '-' || unit === '-' || bloomLevel === '-' || co === '-') {
+      alert('Please fill in all required fields');
+      return false;
     }
-
-    // Check if unit, bloomLevel, and co are not selected
-    if (unit === '-' || bloomLevel === '-' || co === '-') {
-      alert('Please select Unit, Bloom\'s Level, and Course Outcome.');
-      return; // Exit the function early
-    }
-  }
+    return true;
+  };
 
   const resetFields = () => {
     setQuestionType('-');
@@ -71,111 +48,105 @@ function SetQuestionPaper() {
     setBloomLevel('-');
     setCo('-');
     setQuestionText('');
-    setImage(null);   // Clear the selected image
-    setSelectedImage(null)
+    setImage(null);
     setAddImage(false);
-  }
+  };
 
   const handleAddShortQuestion = () => {
-
-    checkConditions()
+    if (!checkConditions()) return;
 
     const question = {
       ques: questionText,
       maxMarks: 2,
-      unit: unit,
-      bloomLevel: bloomLevel,
-      co: co,
+      unit,
+      bloomLevel,
+      co,
       image: image ? URL.createObjectURL(image) : null,
     };
 
     if (shortQuestionsLength >= 8) {
       alert('You can only add 8 short questions');
-
       resetFields();
-
       return;
     }
 
-    dispatch((setShortQues(question)));
-
-    resetFields()
-  }
+    dispatch(setShortQues(question));
+    alert('Short question added successfully');
+    resetFields();
+  };
 
   const handleAddLongQuestion = () => {
-    checkConditions()
+    if (!checkConditions()) return;
 
     const question = {
       ques: questionText,
       maxMarks: 10,
-      unit: unit,
-      bloomLevel: bloomLevel,
-      co: co,
+      unit,
+      bloomLevel,
+      co,
       image: image ? URL.createObjectURL(image) : null,
     };
 
     if (longQuestionsLength >= 4) {
       alert('You can only add 4 long questions');
-
       resetFields();
-
       return;
     }
 
-    dispatch((setLongQues(question)));
-
+    dispatch(setLongQues(question));
     alert('Long question added successfully');
-    resetFields()
-  }
+    resetFields();
+  };
 
   const handleSubQuestion1 = () => {
-    checkConditions()
+    if (!checkConditions()) return;
 
     const question = {
       ques: questionText,
       maxMarks: 5,
-      unit: unit,
-      bloomLevel: bloomLevel,
-      co: co,
+      unit,
+      bloomLevel,
+      co,
       image: image ? URL.createObjectURL(image) : null,
     };
 
     setSubQues([...subQues, question]);
-    alert('Sub question 1 added successfully');
-    resetFields()
-  }
+    alert('Sub-question 1 added successfully');
+    resetFields();
+  };
 
   const handleSubQuestion2 = () => {
-    checkConditions()
+    if (!checkConditions()) return;
 
     const question = {
       ques: questionText,
       maxMarks: 5,
-      unit: unit,
-      bloomLevel: bloomLevel,
-      co: co,
+      unit,
+      bloomLevel,
+      co,
       image: image ? URL.createObjectURL(image) : null,
     };
 
     setSubQues([...subQues, question]);
-    alert('Sub question 1 added successfully');
-    resetFields()
-  }
+    alert('Sub-question 2 added successfully');
+    resetFields();
+  };
 
   const handleLongQuestionWithSubQuestions = () => {
     if (subQues.length < 2) {
-      alert('Please add both sub questions');
+      alert('Please add both sub-questions');
       return;
     }
     dispatch(setLongQues({ subQues }));
-  }
+    setSubQues([]);
+  };
 
   const handleAddQuestion = () => {
     if (questionType === 'short') {
       handleAddShortQuestion();
-    } else if (questionType === 'long' && longQuestionSubType === "1") {
+    } else if (questionType === 'long' && longQuestionSubType === '1') {
       handleAddLongQuestion();
-    } else if (questionType === 'long' && longQuestionSubType === "2") {
+    } else if (questionType === 'long' && longQuestionSubType === '2') {
       if (subQues.length === 0) {
         handleSubQuestion1();
       } else if (subQues.length === 1) {
@@ -186,89 +157,97 @@ function SetQuestionPaper() {
 
   useEffect(() => {
     if (subQues.length === 2) {
-      handleLongQuestionWithSubQuestions(); // Dispatch the long question with sub-questions
-      setSubQues([]); // Clear the subQues array
+      handleLongQuestionWithSubQuestions();
     }
-  }, [subQues]); // This effect runs when subQues changes
-
+  }, [subQues]);
 
   return (
     <div>
-      <h1 className='text-center text-3xl font-bold'>Set Questions Below</h1>
+      <h1 className="text-center text-3xl font-bold text-[#ffffff]">Set Questions Below</h1>
 
-      {/* Container for other details */}
-      <div className='flex justify-around w-full'>
-        {/* Container to set question type */}
-        <div className='bg-black h-fit p-2 rounded-lg border-2 border-[#9c36b5]'>
-          <Select options={questionTypeOptions} labelStyle={'text-white'} value={questionType} label='Question Type' onChange={e => setQuestionType(e.target.value)} />
+      {/* Question Details */}
+      <div className="flex justify-around w-full mt-5">
+        {/* Question Type */}
+        <div className="bg-[#111827] p-2 rounded-lg border-2 border-[#4b5563]">
+          <Select
+            options={questionTypeOptions}
+            label="Question Type"
+            value={questionType}
+            onChange={e => setQuestionType(e.target.value)}
+            labelStyle="text-white"
+          />
         </div>
 
-        {/* Container to set question subtype */}
+        {/* Long Question SubType */}
         {questionType === 'long' && (
-          <div className='bg-black h-fit p-2 rounded-lg border-2 border-[#9c36b5]'>
-            <Select value={longQuestionSubType} options={longQuestionsSubTypeOptions} label='Two Parts Needed ?' labelStyle='text-white' onChange={e => setLongQuestionSubType(e.target.value)} />
+          <div className="bg-[#111827] p-2 rounded-lg border-2 border-[#4b5563]">
+            <Select
+              value={longQuestionSubType}
+              options={longQuestionsSubTypeOptions}
+              label="Two Parts Needed?"
+              onChange={e => setLongQuestionSubType(e.target.value)}
+              labelStyle="text-white"
+            />
           </div>
         )}
 
-        {/* Container to set sub details */}
-        <div className='flex justify-evenly gap-2 bg-black border-2 border-[#9c36b5] p-2 w-full rounded-lg'>
-          {/* container to set unit */}
-          <Select options={unitOptions} optionStyle='w-fit' onChange={e => setUnit(e.target.value)} value={unit} label='Unit' labelStyle='text-white text-sm' />
-
-
-          {/* Container to set Bloom's Level */}
-
-          <Select options={bloomLevelOptions} optionStyle='w-fit' onChange={e => setBloomLevel(e.target.value)} value={bloomLevel} label='BL' labelStyle='text-white text-sm' />
-
-          {/* Container to set Course Outcome */}
-
-          <Select options={courseOutcomeOptions} optionStyle='w-fit' onChange={e => setCo(e.target.value)} value={co} label='CO' labelStyle='text-white text-sm' />
+        {/* Sub-Details */}
+        <div className="flex gap-2 bg-[#111827] border-2 border-[#4b5563] p-2 w-full rounded-lg">
+          <Select
+            options={unitOptions}
+            value={unit}
+            onChange={e => setUnit(e.target.value)}
+            label="Unit"
+            labelStyle="text-white text-sm"
+          />
+          <Select
+            options={bloomLevelOptions}
+            value={bloomLevel}
+            onChange={e => setBloomLevel(e.target.value)}
+            label="BL"
+            labelStyle="text-white text-sm"
+          />
+          <Select
+            options={courseOutcomeOptions}
+            value={co}
+            onChange={e => setCo(e.target.value)}
+            label="CO"
+            labelStyle="text-white text-sm"
+          />
         </div>
-
       </div>
 
-      <div className='flex ml-10 items-end mt-5 gap-10 font-extrabold'>
+      {/* Add Image and Question */}
+      <div className="flex flex-col items-center gap-5 mt-5">
+        <Button label={!addImage ? 'Add Image' : 'Close'} onClick={handleAddImage} className="bg-[#111827] border-2 border-[#4b5563] text-white px-4 py-2 rounded-lg" />
 
-        <div className='text-center w-4/5 flex flex-col gap-1'>
+        {addImage && (
+          <label className="custom-file-upload">
+            Choose File
+            <Input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+          </label>
+        )}
 
-          <div className='flex gap-5 justify-between items-center w-full'>
-            <button className='bg-black mb-2 border-2 border-[#9c36b5] text-[#9c36b5] px-4 py-2 rounded-lg mt-4' onClick={handleAddImage}>
-              Add Image
-            </button>
-            {/* Create a custom button to trigger file input */}
-            <label className={addImage ? "visible custom-file-upload" : "hidden custom-file-upload"} >
-              Choose File
-              <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
-            </label>
+        {image && (
+          <div className="selected-image-box">
+            <Image className="h-20 w-20" src={URL.createObjectURL(image)} alt="Selected" />
+            <Button className="mt-1 p-1 remove-image-button" onClick={handleRemoveImage} label={<FaTrash />} />
           </div>
+        )}
 
-          <div className="selected-image-container">
-            {selectedImage && (
-              <div className="selected-image-box">
-                <img className='h-40 w-40' src={URL.createObjectURL(selectedImage)} alt="Selected" />
-                <button className="remove-image-button" onClick={handleRemoveImage}>
-                  &#10005;
-                </button>
-              </div>
-            )}
-          </div>
-          <div id="editor" className=' bg-black rounded-lg border-2 border-[#9c36b5] p-2'>
-            <TextEditor value={questionText} setValue={setQuestionText} />
-          </div>
-
-          {/* Container to put add and done buttons */}
-          <div className='flex'>
-            <button className='bg-black border-2 border-[#9c36b5] text-[#9c36b5] px-4 py-2 rounded-lg mt-4' onClick={handleAddQuestion}>Add</button>
-
-            <button className='bg-black border-2 border-[#ff0000] text-[#523bff] px-4 py-2 rounded-lg mt-4 ml-4' >Print</button>
-          </div>
+        <div id="editor" className="bg-[#111827] rounded-lg border-2 border-[#4b5563] p-2 w-full">
+          <TextEditor value={questionText} setValue={setQuestionText} />
         </div>
-        {/* // )
-      } */}
 
+        {/* Add Question Button */}
+        <Button
+          label="Add"
+          onClick={handleAddQuestion}
+          className="bg-[#111827] border-2 border-[#4b5563] text-white px-4 py-2 rounded-lg mt-4"
+        />
       </div>
     </div>
-  )
+  );
 }
 
-export default SetQuestionPaper
+export default SetQuestionPaper;

@@ -1,39 +1,56 @@
-import React from 'react'
-import { LongQuestion, ShortQuestion, ShortQuestionHeading, TestPaperHeader } from './index.js'
+import React from 'react';
+import { LongQuestion, ShortQuestion, ShortQuestionHeading, TestPaperHeader, Button } from './index.js';
 import { useSelector } from 'react-redux';
 
 function TestPaper() {
+  const handlePrint = () => {
+    const printContent = document.getElementById("test-paper-content").innerHTML;
+    const originalContent = document.body.innerHTML;
+
+    // Display the hidden div
+    document.getElementById("test-paper-content").style.display = "flex";
+
+    // Replace the current content of the body with the content to be printed
+    document.body.innerHTML = printContent;
+
+    // Print the content
+    window.print();
+
+    // Restore the original content after printing
+    document.body.innerHTML = originalContent;
+
+    // Hide the hidden div again
+    document.getElementById("test-paper-content").style.display = "hidden";
+  }
+
 
   const longQuestions = useSelector(state => state.longQues);
-  console.log(longQuestions);
-  
-
   const shortQuestions = useSelector(state => state.shortQues);
-  console.log(shortQuestions);
-  
-
   return (
-    <div className='border-black border-2'>
-      <div className="px-12 bg-white h-[1500px] overflow-y-scroll">
-        <TestPaperHeader />
+    <div>
+      <div className="px-12 bg-white h-auto overflow-y-scroll no-scrollbar">
+        <TestPaperHeader textColour={'text-white'} />
 
         {/* Question Paper */}
-        <h1 className="mt-4 mb-2 font-extrabold text-sm underline">
+        <h1 className="mt-4 mb-2 text-black font-extrabold text-sm underline">
           Attempt All Questions.
         </h1>
 
         {/* Short Questions */}
-        
-        {shortQuestions.length > 0 && <ShortQuestionHeading/>}
-
-        {/* Questions */}
+        {shortQuestions.length > 0 && <ShortQuestionHeading />}
         <div>
-          <h2 className="font-medium text-sm underline mb-1 mt-2 ml-4">Attemp any five question only.</h2>
-          {shortQuestions && shortQuestions.map((question, index) => {
-            return (
-              <ShortQuestion key={index} QuesNo={String.fromCharCode(65 + index)} Text={question.ques} Unit={question.unit} BTL={question.bloomLevel} CO={question.co} ImageSrc={question.image} />
-            );
-          })}
+          <h2 className="font-medium text-black text-sm underline mb-1 mt-2 ml-4">Attempt any five questions only.</h2>
+          {shortQuestions && shortQuestions.map((question, index) => (
+            <ShortQuestion
+              key={index}
+              QuesNo={String.fromCharCode(65 + index)}
+              Text={question.ques}
+              Unit={question.unit}
+              BTL={question.bloomLevel}
+              CO={question.co}
+              ImageSrc={question.image}
+            />
+          ))}
         </div>
 
         {/* Long Questions */}
@@ -43,24 +60,137 @@ function TestPaper() {
               <h2>LONG QUESTIONS</h2>
             </div>
             <div>
-              {longQuestions[0] && <LongQuestion QuesNo="1" Text={longQuestions[0].ques && longQuestions[0].ques} MM={longQuestions[0].maxMarks && longQuestions[0].maxMarks} Unit={longQuestions[0].unit && longQuestions[0].unit} BTL={longQuestions[0].bloomLevel && longQuestions[0].bloomLevel} CO={longQuestions[0].co && longQuestions[0].co} SubQues={longQuestions[0].subQues && longQuestions[0].subQues} ImageSrc={longQuestions[0].image && longQuestions[0].image}/>}
+              {longQuestions.map((question, index) => (
+                <div key={index}>
+                  <LongQuestion
+                    QuesNo={`${index + 1}`}
+                    Text={question.ques}
+                    MM={question.maxMarks}
+                    Unit={question.unit}
+                    BTL={question.bloomLevel}
+                    CO={question.co}
+                    SubQues={question.subQues}
+                    ImageSrc={question.image}
+                  />
+                  {index % 2 !== 0 && <h1 className="text-center font-semibold text-base">OR</h1>}
+                </div>
+              ))}
             </div>
-            <h1 className="text-center font-semibold text-base">OR</h1>
-            {/* Question 2 */}
-            <div>
-            {longQuestions[1] && <LongQuestion QuesNo="2" Text={longQuestions[1].ques && longQuestions[1].ques} MM={longQuestions[1].maxMarks && longQuestions[1].maxMarks} Unit={longQuestions[1].unit && longQuestions[1].unit} BTL={longQuestions[1].bloomLevel && longQuestions[1].bloomLevel} CO={longQuestions[1].co && longQuestions[1].co} SubQues={longQuestions[1].subQues && longQuestions[1].subQues} ImageSrc={longQuestions[1].image && longQuestions[1].image}/>}
-            </div>
-            {/* Question 3 */}
-            {longQuestions[2] && <LongQuestion QuesNo="3" Text={longQuestions[2].ques && longQuestions[2].ques} MM={longQuestions[2].maxMarks && longQuestions[2].maxMarks} Unit={longQuestions[2].unit && longQuestions[2].unit} BTL={longQuestions[2].bloomLevel && longQuestions[2].bloomLevel} CO={longQuestions[2].co && longQuestions[2].co} SubQues={longQuestions[2].subQues && longQuestions[2].subQues} ImageSrc={longQuestions[2].image && longQuestions[2].image}/>}
-            <h1 className="text-center font-semibold text-base">OR</h1>
-
-            {/* Question 4 */}
-            {longQuestions[3] && <LongQuestion QuesNo="4" Text={longQuestions[3].ques && longQuestions[3].ques} MM={longQuestions[3].maxMarks && longQuestions[3].maxMarks} Unit={longQuestions[3].unit && longQuestions[3].unit} BTL={longQuestions[3].bloomLevel && longQuestions[3].bloomLevel} CO={longQuestions[3].co && longQuestions[3].co} SubQues={longQuestions[3].subQues && longQuestions[3].subQues} ImageSrc={longQuestions[3].image && longQuestions[3].image}/>}
           </>
         )}
       </div>
+
+      <div className='hidden' id='test-paper-content'>
+        <div className='flex'>
+          <div className="px-12 bg-white h-[1500px] overflow-y-scroll no-scrollbar">
+            <TestPaperHeader />
+
+            {/* Question Paper */}
+            <h1 className="mt-4 mb-2 font-extrabold text-sm underline">
+              Attempt All Questions.
+            </h1>
+
+            {/* Short Questions */}
+            {shortQuestions.length > 0 && <ShortQuestionHeading />}
+            <div>
+              <h2 className="font-medium text-sm underline mb-1 mt-2 ml-4">Attempt any five questions only.</h2>
+              {shortQuestions && shortQuestions.map((question, index) => (
+                <ShortQuestion
+                  key={index}
+                  QuesNo={String.fromCharCode(65 + index)}
+                  Text={question.ques}
+                  Unit={question.unit}
+                  BTL={question.bloomLevel}
+                  CO={question.co}
+                  ImageSrc={question.image}
+                />
+              ))}
+            </div>
+
+            {/* Long Questions */}
+            {longQuestions.length > 0 && (
+              <>
+                <div className="mt-6 ml-6 text-sm font-bold">
+                  <h2>LONG QUESTIONS</h2>
+                </div>
+                <div>
+                  {longQuestions.map((question, index) => (
+                    <div key={index}>
+                      <LongQuestion
+                        QuesNo={`${index + 1}`}
+                        Text={question.ques}
+                        MM={question.maxMarks}
+                        Unit={question.unit}
+                        BTL={question.bloomLevel}
+                        CO={question.co}
+                        SubQues={question.subQues}
+                        ImageSrc={question.image}
+                      />
+                      {index % 2 !== 0 && <h1 className="text-center font-semibold text-base">OR</h1>}
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="px-12 bg-white h-[1500px] overflow-y-scroll no-scrollbar">
+            <TestPaperHeader />
+
+            {/* Question Paper */}
+            <h1 className="mt-4 mb-2 font-extrabold text-sm underline">
+              Attempt All Questions.
+            </h1>
+
+            {/* Short Questions */}
+            {shortQuestions.length > 0 && <ShortQuestionHeading />}
+            <div>
+              <h2 className="font-medium text-sm underline mb-1 mt-2 ml-4">Attempt any five questions only.</h2>
+              {shortQuestions && shortQuestions.map((question, index) => (
+                <ShortQuestion
+                  key={index}
+                  QuesNo={String.fromCharCode(65 + index)}
+                  Text={question.ques}
+                  Unit={question.unit}
+                  BTL={question.bloomLevel}
+                  CO={question.co}
+                  ImageSrc={question.image}
+                />
+              ))}
+            </div>
+
+            {/* Long Questions */}
+            {longQuestions.length > 0 && (
+              <>
+                <div className="mt-6 ml-6 text-sm font-bold">
+                  <h2>LONG QUESTIONS</h2>
+                </div>
+                <div>
+                  {longQuestions.map((question, index) => (
+                    <div key={index}>
+                      <LongQuestion
+                        QuesNo={`${index + 1}`}
+                        Text={question.ques}
+                        MM={question.maxMarks}
+                        Unit={question.unit}
+                        BTL={question.bloomLevel}
+                        CO={question.co}
+                        SubQues={question.subQues}
+                        ImageSrc={question.image}
+                      />
+                      {index % 2 !== 0 && <h1 className="text-center font-semibold text-base">OR</h1>}
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <Button label={'Print'} onClick={handlePrint} className={'w-full rounded-sm hover:bg-slate-700'} />
     </div>
-  )
+  );
 }
 
-export default TestPaper
+export default TestPaper;

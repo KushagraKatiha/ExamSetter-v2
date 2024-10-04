@@ -1,20 +1,19 @@
 import {
   Banner,
   Credits,
-  TestPaper,
+  PreviewComponent,
   SetQuestionPaper,
   Bloom,
-} from "./components/index"
-import TestPaperDetails from "./components/TestPaperDetails"
+} from "./components/index";
+import TestPaperDetails from "./components/TestPaperDetails";
 
 function App() {
-
   return (
     <>
       <div>
-        <Banner title={'THE EXAM SETTER'} logo={'src/assets/logo-with-name.png'}/>
+        <Banner title={'THE EXAM SETTER'} logo={'src/assets/logo-with-name.png'} />
       </div>
-      <div className="flex gap-2 h-full bg-gradient-to-r from-[#a77ed6] to-[#a77ed6]">
+      <div className="flex gap-2 h-full bg-[#1e1e1e]">
         {/* Left Part */}
         <div className="w-1/2 p-2">
           <TestPaperDetails />
@@ -23,13 +22,17 @@ function App() {
         </div>
 
         {/* Right Part */}
-        <div className="w-1/2 overflow-x-scroll bg-white">
-            <TestPaper/>
-        </div>
+        <PreviewComponent />
       </div>
-      <Credits name={'Kushagra Katiha'} course={'B.Tech CSE (2021-2025)'} work={'Developed By: '} link={'https://www.linkedin.com/in/kushagrakatiha/'} logo={'src/assets/logo.png'} />
+      <Credits
+        name={'Kushagra Katiha'}
+        course={'B.Tech CSE (2021-2025)'}
+        work={'Developed By: '}
+        link={'https://www.linkedin.com/in/kushagrakatiha/'}
+        logo={'src/assets/logo.png'}
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

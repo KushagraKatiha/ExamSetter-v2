@@ -1,16 +1,15 @@
-import React from 'react'
+import React from 'react';
+import {Image} from './index';
 
-function Banner({logo, title}) {
+function Banner({ logo, title }) {
   return (
-    <div className='bg-gradient-to-r from-orange-500 to-orange-700 flex justify-center items-center py-5 border-b-black border-b-4'>
-        <div>
-            <h1 className='text-center font-extrabold py-4 w-auto text-5xl'>{title}</h1>
-        </div>
-        <div>
-            <img src={logo} alt='logo' className='w-full' />
-        </div>
+    <div className='bg-gradient-to-r from-gray-800 to-gray-900 flex justify-around items-center py-3'>
+
+        <Image src={logo} alt='logo' className='bg-gradient-to-r from-gray-200 to-gray-400 w-40 ml-4 h-auto rounded-lg shadow-lg' />
+
+        <h1 className='text-center font-extrabold text-4xl text-white'>{title}</h1>
     </div>
-  )
+  );
 }
 
-export default Banner
+export default Banner;

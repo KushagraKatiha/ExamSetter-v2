@@ -1,12 +1,21 @@
-import React, {forwardRef} from 'react'
+import React, { forwardRef } from 'react';
 
-function Input({label, type, placeholder, value, onChange,  disabled}, ref) {
+function Input({ label, labelStyle, type, className, placeholder, value, onChange, disabled, ...props }, ref) {
   return (
-    <div>
-        {label && <label className='font-bold text-lg'>{label}</label>}
-        <input ref={ref} className={`border-2 w-full border-[#9c36b5] h-10 focus:outline-none px-2 bg-black text-white rounded-lg`} type={type} placeholder={placeholder} value={value} onChange={onChange} disabled={disabled}/>
+    <div className="mb-4">
+      {label && <label className={`${labelStyle} font-bold text-sm text-gray-300`}>{label}</label>}
+      <input
+        ref={ref}
+        className={`border-2 w-full h-10 focus:outline-none px-3 bg-gray-800 text-white rounded-lg border-gray-600 placeholder-gray-500 transition duration-300 ease-in-out ${className}`}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        {...props}
+      />
     </div>
-  )
+  );
 }
 
-export default forwardRef(Input)
+export default forwardRef(Input);

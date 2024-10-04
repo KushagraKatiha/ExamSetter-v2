@@ -1,11 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-function Image({src}) {
+function Image({ src, className, alt = 'quesImage', ...props }) {
   return (
-    <div>
-        <img src={src} alt="quesImage" className="w-full h-[100px]" />
+    <div className="mb-4">
+      <img
+        src={src}
+        alt={alt}
+        className={`w-full h-[100px] rounded-lg ${className}`}
+        {...props}
+      />
     </div>
-  )
+  );
 }
 
-export default Image
+export default Image;

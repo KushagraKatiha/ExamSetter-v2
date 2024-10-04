@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-function TestPaperHeader() {
+function TestPaperHeader({ textColor, borderColor }) {
     const { examName, selectedPrograms, semester, courseCode, courseName, otherProgram, teacherName, teacherId } = useSelector(state => state.details.questionPaperDetails);
 
     const [year, setYear] = useState('');
@@ -18,7 +18,6 @@ function TestPaperHeader() {
 
     // Use useEffect to update the year when semester changes
     useEffect(() => {
-
         if (semester === 'I' || semester === 'II') {
             setYear('First Year');
         } else if (semester === 'III' || semester === 'IV') {
@@ -31,13 +30,13 @@ function TestPaperHeader() {
     }, [semester]);  // Only update when semester changes
 
     return (
-        <div className='border-2 border-pink-400 mt-2'>
+        <div className="mt-2">
             <div className="bg-black">
                 <img src="src/assets/test-paper-header.jpg" alt="banner" className="w-full h-[100px]" />
             </div>
 
             {/* College Name, Exam Name, Program Name */}
-            <div className="mt-4 text-black flex flex-col items-center justify-center">
+            <div className={`${textColor} mt-4 text-black flex flex-col items-center justify-center`}>
                 <h1 className="font-bold text-base text-center">
                     College of Computing Sciences and Information Technology
                 </h1>
@@ -49,8 +48,7 @@ function TestPaperHeader() {
                     {examName && examName.toUpperCase()}
                 </h2>
                 <h2 className="text-xs">
-                    Program Name:
-                    {selectedPrograms && selectedPrograms.length > 0 && selectedPrograms.join('/')}
+                    Program Name: {selectedPrograms && selectedPrograms.length > 0 && selectedPrograms.join('/')}
                     {otherProgram ? `/${otherProgram.toUpperCase()}` : ''}
                 </h2>
             </div>
@@ -59,10 +57,10 @@ function TestPaperHeader() {
             <div className="mt-1 text-black flex flex-col items-center text-xs">
                 <table className="border-black border-2 w-4/5">
                     <tbody>
-                        <tr className="border-black border-2">
-                            <td className="px-2 border-black border-2">Year: {year}</td>
-                            <td className="px-2 border-black border-2">Semester: {semester}</td>
-                            <td className="px-2 border-black border-2">Academic Session: {academicSession}</td>
+                        <tr className={`${borderColor} border-black border-2`}>
+                            <td className="px-2 text-xs border-black border-2">Year: {year}</td>
+                            <td className="px-2 text-xs border-black border-2">Semester: {semester}</td>
+                            <td className="px-2 text-xs border-black border-2">Academic Session: {academicSession}</td>
                         </tr>
                         <tr className="border-black border-2">
                             <td colSpan={2} className="px-2 border-black border-2">
