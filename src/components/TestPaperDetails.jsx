@@ -28,7 +28,7 @@ function TestPaperDetails() {
     };
 
     const handleSave = () => {
-        if (semester === '' || examName === '' || courseCode === '' || courseName === '' || teacherName === '' || teacherId === '' || selectedPrograms.length === 0) {
+        if (semester === '' || examName === '' || courseCode === '' || courseName === '' || selectedPrograms.length === 0) {
             alert('Please fill all the exam details');
             return;
         }
@@ -68,7 +68,7 @@ function TestPaperDetails() {
                         </td>
                         <td className='p-2'>
                             <Input
-                                label='Teacher'
+                                label="Faculty's Name"
                                 type='text'
                                 placeholder='Teacher...'
                                 value={teacherName}
@@ -79,7 +79,7 @@ function TestPaperDetails() {
                         </td>
                         <td className='p-2'>
                             <Input
-                                label='Teacher ID'
+                                label='Employee Code'
                                 type='text'
                                 placeholder='ID...'
                                 value={teacherId}

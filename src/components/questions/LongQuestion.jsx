@@ -6,10 +6,11 @@ function LongQuestion({ QuesNo = null, Text = null, MM = 10, Unit = null, BTL = 
   return (
     <div className="w-full">
       {SubQues ? (
-        <div className="flex ">
+        <div className="flex items-baseline">
           {/* Sub Questions */}
-          <span className={`${textColor} mr-1 text-xs`}>{QuesNo}</span>
-          <div className='flex w-full justify-between'>
+          {QuesNo == '2' && <span className={`font-medium mr-1 ${textColor}`}>{QuesNo}.</span>}
+              {QuesNo == '3' && <span className={`font-medium mr-1 ${textColor}`}>{QuesNo}.</span>}
+          <div className={QuesNo == '2' ? 'flex w-full justify-between' : QuesNo == '3' ? 'flex w-full justify-between' : 'ml-[1rem] flex w-full justify-between'}>
             <div className="w-full">
               {SubQues.map((sub, index) => (
                 <SubLongQuestion
@@ -21,7 +22,7 @@ function LongQuestion({ QuesNo = null, Text = null, MM = 10, Unit = null, BTL = 
                   BTL={sub.bloomLevel}
                   CO={sub.co}
                   ImageSrc={sub.image}
-                  textColor={textColor} // Pass textColor to SubLongQuestion
+                  textColor={textColor} 
                 />
               ))}
             </div>
@@ -31,8 +32,9 @@ function LongQuestion({ QuesNo = null, Text = null, MM = 10, Unit = null, BTL = 
         <div className={`w-full flex mb-1 ${textColor}`}>
           <div className="flex flex-col">
             <div className="flex text-xs">
-              <span className={`font-medium text-xs mr-1 ${textColor}`}>{QuesNo}.</span>
-              <div className={`overflow-hidden w-[550px] text-xs text-justify ${textColor}`}>
+              {QuesNo == '2' && <span className={`font-medium mr-1 ${textColor}`}>{QuesNo}.</span>}
+              {QuesNo == '3' && <span className={`font-medium mr-1 ${textColor}`}>{QuesNo}.</span>}
+              <div className={QuesNo == '2' ? `overflow-hidden w-[550px] text-xs text-justify ${textColor}` : QuesNo == '3' ? `overflow-hidden w-[550px] text-xs text-justify ${textColor}` : `ml-[1rem] overflow-hidden w-[550px] text-xs text-justify ${textColor}`}>
                 {parse(Text)}
               </div>
             </div>
@@ -42,7 +44,7 @@ function LongQuestion({ QuesNo = null, Text = null, MM = 10, Unit = null, BTL = 
               </div>
             )}
           </div>
-          <div className={`flex justify-between w-[30%] ml-6 text-xs ${textColor}`}>
+          <div className={`flex justify-between items-center w-[250px] ml-7 text-xs ${textColor}`}>
             <p className=''>{MM}</p>
             <p className=''>{Unit}</p>
             <p className=''>{BTL}</p>

@@ -7,7 +7,7 @@ function ShortQuestionHeading({ textColor = 'text-black' }) {
         <span className={`font-medium mr-1 ${textColor}`}>1.</span>
         <p className={`w-[550px] text-justify ${textColor}`}>SHORT QUESTIONS</p>
       </div>
-      <div className={`flex gap-7 justify-between w-[30%] ml-5 text-sm ${textColor}`}>
+      <div className={`flex gap-7 justify-between w-[250px] ml-5 text-sm ${textColor}`}>
         <p className='text-center'>{textColor === 'text-black' ? 'MM' : <span className={`{textColor} text-center`}>MM</span>}</p>
         <p className='text-center'>{textColor === 'text-black' ? 'Unit' : <span className={`{textColor} text-center`}>Unit</span>}</p>
         <p className='text-center'>{textColor === 'text-black' ? 'BTL' : <span className={`{textColor} text-center`}>BTL</span>}</p>

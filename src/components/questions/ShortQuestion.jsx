@@ -18,7 +18,7 @@ function ShortQuestion({ QuesNo, Text, MM = 2, Unit, BTL, CO, ImageSrc = null, t
                     </div>
                 )}
             </div>
-            <div className={`flex justify-between w-[30%] ml-6 text-xs ${textColor}`}>
+            <div className={`flex justify-between items-center w-[250px] ml-7 text-xs ${textColor}`}>
                 <p className=''>{MM}</p>
                 <p className=''>{Unit}</p>
                 <p className=''>{BTL}</p>

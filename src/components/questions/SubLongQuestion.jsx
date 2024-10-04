@@ -19,7 +19,7 @@ function SubLongQuestion({ QuesNo, Text, MM = 5, Unit, BTL, CO, ImageSrc = null,
             </div>
           )}
         </div>
-        <div className={`flex justify-between w-[30%] ml-6 text-xs ${textColor}`}>
+        <div className={`flex justify-between items-center w-[250px] ml-4 text-xs ${textColor}`}>
           <p className=''>{MM}</p>
           <p className=''>{Unit}</p>
           <p className=''>{BTL}</p>
