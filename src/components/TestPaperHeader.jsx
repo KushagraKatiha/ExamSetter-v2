@@ -32,7 +32,7 @@ function TestPaperHeader({ textColor='text-black', borderColor='border-black' })
     return (
         <div className="mt-2">
             <div className="bg-black">
-                <img src="src/assets/test-paper-header.jpg" alt="banner" className="w-full h-[100px]" />
+                <img src="https://my-images-bucket-07.s3.ap-south-1.amazonaws.com/test-paper-header.jpg" alt="banner" className="w-full h-[100px]" />
             </div>
 
             {/* College Name, Exam Name, Program Name */}
