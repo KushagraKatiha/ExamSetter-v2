@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <div>
-        <Banner title={'THE EXAM SETTER'} logo={'https://my-images-bucket-07.s3.ap-south-1.amazonaws.com/logo-with-name.png'} />
+        <Banner title={'THE EXAM SETTER'} logo={'https://res.cloudinary.com/kushagra-cloud/image/upload/v1749242334/Exam-Setter/dfgw605bz3lqtvtlhfhi.png'} />
       </div>
       <div className="flex gap-2 h-full bg-[#1e1e1e]">
         {/* Left Part */}
@@ -29,7 +29,7 @@ function App() {
         course={'B.Tech CSE (2021-2025)'}
         work={'Developed By: '}
         link={'https://www.linkedin.com/in/kushagrakatiha/'}
-        logo={'https://my-images-bucket-07.s3.ap-south-1.amazonaws.com/logo.png'}
+        logo={'https://res.cloudinary.com/kushagra-cloud/image/upload/v1749242333/Exam-Setter/mergfbbinzpznve6tcjn.png'}
       />
     </>
   );
