@@ -2,10 +2,10 @@ import React from 'react';
 import { Image } from '../index';
 import parse from 'html-react-parser';
 
-function SubLongQuestion({ QuesNo, Text, MM = 5, Unit, BTL, CO, ImageSrc = null, textColor = 'text-black' }) {
+function SubLongQuestion({ QuesNo, Text, MM = 5, Unit, BTL, CO, ImageSrc = null, textColor = 'text-enterprise-dark' }) {
   return (
     <>
-      <div className={`w-full flex mb-1 ${textColor}`}>
+      <div className={`w-full flex mb-1 ${textColor} bg-enterprise-bg rounded-lg`}>
         <div className="flex flex-col">
           <div className={`flex text-xs ${textColor}`}>
             <span className={`font-medium text-xs mr-1 ${textColor}`}>{QuesNo}</span>

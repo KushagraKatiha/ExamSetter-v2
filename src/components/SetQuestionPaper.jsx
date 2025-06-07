@@ -3,15 +3,21 @@ import {
   courseOutcomeOptions, bloomLevelOptions, unitOptions, questionTypeOptions, longQuestionsSubTypeOptions, Button, Input, TextEditor, Select, Image
 } from './index';
 import { useDispatch, useSelector } from 'react-redux';
-import { setShortQues } from '../store/features/questions/shortQuesSlice';
-import { setLongQues } from '../store/features/questions/longQuesSlice';
+import { setShortQues, editShortQues } from '../store/features/questions/shortQuesSlice';
+import { setLongQues, editLongQues } from '../store/features/questions/longQuesSlice';
 import { FaTrash } from 'react-icons/fa'; 
 
-function SetQuestionPaper() {
+function SetQuestionPaper({ editingData, onEditComplete }) {
   const dispatch = useDispatch();
 
-  const shortQuestionsLength = useSelector(state => state.shortQues.length);
-  const longQuestionsLength = useSelector(state => state.longQues.length);
+  const shortQuestions = useSelector(state => state.shortQues);
+  const longQuestions = useSelector(state => state.longQues);
+  const shortQuestionsLength = shortQuestions.length;
+  const longQuestionsLength = longQuestions.length;
+
+  // Editing state
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editingType, setEditingType] = useState(null); // 'short' or 'long'
 
   const [subQues, setSubQues] = useState([]);
   const [image, setImage] = useState(null);  
@@ -35,8 +41,14 @@ function SetQuestionPaper() {
   };
 
   const checkConditions = () => {
-    if (questionType === '-' || unit === '-' || bloomLevel === '-' || co === '-') {
-      alert('Please fill in all required fields');
+    if (
+      questionType === '-' ||
+      unit === '-' ||
+      bloomLevel === '-' ||
+      co === '-' ||
+      !questionText.trim()
+    ) {
+      alert('Please fill in all required fields (Question Type, Unit, Bloom Level, CO, and Question Text)');
       return false;
     }
     return true;
@@ -161,9 +173,77 @@ function SetQuestionPaper() {
     }
   }, [subQues]);
 
+  // Populate form if editingData is provided
+  useEffect(() => {
+    if (editingData) {
+      const { type, index, data } = editingData;
+      setEditingIndex(index);
+      setEditingType(type);
+      setQuestionType(type);
+      setUnit(data.unit || '-');
+      setBloomLevel(data.bloomLevel || '-');
+      setCo(data.co || '-');
+      setQuestionText(data.ques || '');
+      setImage(null); // Images are handled as URLs, so skip for now
+      if (type === 'long' && data.subQues) {
+        setLongQuestionSubType('2');
+        setSubQues(data.subQues);
+      } else {
+        setLongQuestionSubType('1');
+        setSubQues([]);
+      }
+    }
+  }, [editingData]);
+
+  const handleUpdateShortQuestion = () => {
+    if (!checkConditions()) return;
+    const updatedQuestion = {
+      ques: questionText,
+      maxMarks: 2,
+      unit,
+      bloomLevel,
+      co,
+      image: image ? URL.createObjectURL(image) : (shortQuestions[editingIndex]?.image || null),
+    };
+    dispatch(editShortQues({ index: editingIndex, updatedQuestion }));
+    alert('Short question updated successfully');
+    resetFields();
+    setEditingIndex(null);
+    setEditingType(null);
+    if (onEditComplete) onEditComplete();
+  };
+
+  const handleUpdateLongQuestion = () => {
+    if (!checkConditions()) return;
+    const updatedQuestion = {
+      ques: questionText,
+      maxMarks: 10,
+      unit,
+      bloomLevel,
+      co,
+      image: image ? URL.createObjectURL(image) : (longQuestions[editingIndex]?.image || null),
+    };
+    dispatch(editLongQues({ index: editingIndex, updatedQuestion }));
+    alert('Long question updated successfully');
+    resetFields();
+    setEditingIndex(null);
+    setEditingType(null);
+    if (onEditComplete) onEditComplete();
+  };
+
+  const handleAddOrUpdateQuestion = () => {
+    if (editingType === 'short') {
+      handleUpdateShortQuestion();
+    } else if (editingType === 'long') {
+      handleUpdateLongQuestion();
+    } else {
+      handleAddQuestion();
+    }
+  };
+
   return (
     <div>
-      <h1 className="text-center text-3xl font-bold text-[#ffffff]">Set Questions Below</h1>
+      <h1 className="text-center text-3xl font-bold text-[#ffffff] mt-5">{editingData ? 'Edit Question' : 'Set Questions Below'}</h1>
 
       {/* Question Details */}
       <div className="flex justify-around w-full mt-5">
@@ -241,8 +321,8 @@ function SetQuestionPaper() {
 
         {/* Add Question Button */}
         <Button
-          label="Add"
-          onClick={handleAddQuestion}
+          label={editingType ? 'Update' : 'Add'}
+          onClick={handleAddOrUpdateQuestion}
           className="bg-[#111827] border-2 border-[#4b5563] text-white px-4 py-2 rounded-lg mt-4"
         />
       </div>

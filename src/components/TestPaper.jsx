@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LongQuestion, ShortQuestion, ShortQuestionHeading, TestPaperHeader, Button } from './index.js';
 import { useSelector } from 'react-redux';
+import SetQuestionPaper from './SetQuestionPaper';
 
 function TestPaper() {
+  const [editingData, setEditingData] = useState(null);
+
   const handlePrint = () => {
     const printContent = document.getElementById("test-paper-content").innerHTML;
     const originalContent = document.body.innerHTML;
@@ -25,6 +28,17 @@ function TestPaper() {
 
   const longQuestions = useSelector(state => state.longQues);
   const shortQuestions = useSelector(state => state.shortQues);
+
+  const handleEditShort = (index, questionData) => {
+    setEditingData({ type: 'short', index, data: questionData });
+  };
+  const handleEditLong = (index, questionData) => {
+    setEditingData({ type: 'long', index, data: questionData });
+  };
+  const handleEditComplete = () => {
+    setEditingData(null);
+  };
+
   return (
     <div>
       <div className="px-12 h-auto overflow-y-scroll no-scrollbar">
@@ -49,6 +63,9 @@ function TestPaper() {
               CO={question.co}
               ImageSrc={question.image}
               textColor='text-white'
+              onEdit={handleEditShort}
+              index={index}
+              questionData={question}
             />
           ))}
         </div>
@@ -72,8 +89,11 @@ function TestPaper() {
                     SubQues={question.subQues}
                     ImageSrc={question.image}
                     textColor='text-white'
+                    onEdit={handleEditLong}
+                    index={index}
+                    questionData={question}
                   />
-                  {index % 2 == 0 && <h1 className="text-center font-semibold text-base">OR</h1>}
+                  {index % 2 == 0 && <h1 className="text-center font-semibold text-base">OR</h1>}h
                 </div>
               ))}
             </div>
@@ -188,7 +208,9 @@ function TestPaper() {
       </div>
         </div>
       </div>
-
+        <div className={`${editingData ? 'block' : 'hidden'} mt-10 border-2 border-white rounded-lg p-4 mb-2`}>
+          <SetQuestionPaper editingData={editingData} onEditComplete={handleEditComplete} />
+        </div>
       <Button label={'Print'} onClick={handlePrint} className={'w-full rounded-sm hover:bg-slate-700'} />
     </div>
   );

@@ -14,7 +14,6 @@ function PreviewComponent() {
       {/* Title and Toggle Button */}
       <div className="flex justify-between items-center bg-black text-white p-4 rounded-t-lg">
         <h1 className="text-lg font-semibold text-center">Preview</h1>
-       
       </div>
 
       {/* Preview Content */}

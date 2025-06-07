@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from '../index';
 import parse from 'html-react-parser';
 
-function ShortQuestion({ QuesNo, Text, MM = 2, Unit, BTL, CO, ImageSrc = null, textColor = 'text-black' }) {
+function ShortQuestion({ QuesNo, Text, MM = 2, Unit, BTL, CO, ImageSrc = null, textColor = 'text-black', onEdit, index, questionData }) {
     return (
         <div className={`w-full flex mb-1 ${textColor}`}>
             <div className="flex flex-col">
@@ -11,6 +11,14 @@ function ShortQuestion({ QuesNo, Text, MM = 2, Unit, BTL, CO, ImageSrc = null, t
                     <div className={`overflow-hidden w-[550px] text-xs text-justify ${textColor}`}>
                         {parse(Text)}
                     </div>
+                    {onEdit && (
+                        <button
+                            className="ml-2 px-2 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700"
+                            onClick={() => onEdit(index, questionData)}
+                        >
+                            Edit
+                        </button>
+                    )}
                 </div>
                 {ImageSrc && (
                     <div className="mr-auto ml-auto h-auto w-1/2">

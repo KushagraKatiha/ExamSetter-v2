@@ -8,9 +8,13 @@ const longQuesSlice = createSlice({
   reducers: {
     setLongQues: (state, action) => {
       state.push(action.payload);
+    },
+    editLongQues: (state, action) => {
+      const { index, updatedQuestion } = action.payload;
+      state[index] = updatedQuestion;
     }
   }
 });
 
-export const { setLongQues } = longQuesSlice.actions;
+export const { setLongQues, editLongQues } = longQuesSlice.actions;
 export default longQuesSlice.reducer;

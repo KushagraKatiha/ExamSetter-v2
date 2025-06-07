@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, SubLongQuestion } from '../index';
 import parse from 'html-react-parser';
 
-function LongQuestion({ QuesNo = null, Text = null, MM = 10, Unit = null, BTL = null, CO = null, ImageSrc = null, SubQues = null, textColor = 'text-black' }) {
+function LongQuestion({ QuesNo = null, Text = null, MM = 10, Unit = null, BTL = null, CO = null, ImageSrc = null, SubQues = null, textColor = 'text-black', onEdit, index, questionData }) {
   return (
     <div className="w-full">
       {SubQues ? (
@@ -26,10 +26,18 @@ function LongQuestion({ QuesNo = null, Text = null, MM = 10, Unit = null, BTL = 
                 />
               ))}
             </div>
+            {onEdit && (
+              <button
+                className="ml-2 px-2 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700"
+                onClick={() => onEdit(index, questionData)}
+              >
+                Edit
+              </button>
+            )}
           </div>
         </div>
       ) : (
-        <div className={`w-full flex mb-1 ${textColor}`}>
+        <div className={`w-full flex mb-1 ${textColor}`}> 
           <div className="flex flex-col">
             <div className="flex text-xs">
               {QuesNo == '2' && <span className={`font-medium mr-1 ${textColor}`}>{QuesNo}.</span>}
@@ -37,6 +45,14 @@ function LongQuestion({ QuesNo = null, Text = null, MM = 10, Unit = null, BTL = 
               <div className={QuesNo == '2' ? `overflow-hidden w-[550px] text-xs text-justify ${textColor}` : QuesNo == '3' ? `overflow-hidden w-[550px] text-xs text-justify ${textColor}` : `ml-[1rem] overflow-hidden w-[550px] text-xs text-justify ${textColor}`}>
                 {parse(Text)}
               </div>
+              {onEdit && (
+                <button
+                  className="ml-2 px-2 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700"
+                  onClick={() => onEdit(index, questionData)}
+                >
+                  Edit
+                </button>
+              )}
             </div>
             {ImageSrc && (
               <div className="mr-auto ml-auto h-auto w-1/2">

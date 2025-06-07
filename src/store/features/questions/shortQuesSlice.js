@@ -9,8 +9,12 @@ const shortQuesSlice = createSlice({
     setShortQues: (state, action) => {
       state.push(action.payload);
     },
+    editShortQues: (state, action) => {
+      const { index, updatedQuestion } = action.payload;
+      state[index] = updatedQuestion;
+    },
   },
 });
 
-export const { setShortQues } = shortQuesSlice.actions;
+export const { setShortQues, editShortQues } = shortQuesSlice.actions;
 export default shortQuesSlice.reducer;
