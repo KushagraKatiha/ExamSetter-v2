@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-// const Mapping = require('../models/Mapping');
+const Mapping = require('../models/TeacherSubject')
 
 // Get all mappings
 router.get('/', auth, async (req, res) => {

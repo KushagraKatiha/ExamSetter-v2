@@ -31,6 +31,7 @@ export const authAPI = {
   },
 
   logout: async () => {
+    console.log("I am here !!!")
     try {
       const response = await api.post('/auth/logout');
       return response.data;
@@ -58,6 +59,24 @@ export const adminAPI = {
     } catch (error) {
       throw error.response?.data || { message: 'Failed to create teacher' };
     }
+  },
+
+  deleteTeacher: async (teacherId) => {
+    try {
+      const response = await api.delete(`/admin/teachers/${teacherId}`);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || { message: 'Failed to delete teacher' };
+    }
+  },
+
+  logout: async () => {
+    try {
+      const response = await api.post('/auth/logout');
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || { message: 'Logout failed' };
+    }
   }
 };
 
@@ -78,6 +97,15 @@ export const subjectAPI = {
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to create subject' };
+    }
+  },
+
+  deleteSubject: async (subjectId) => {
+    try {
+      const response = await api.delete(`/subjects/${subjectId}`);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || { message: 'Failed to delete subject' };
     }
   }
 };
@@ -150,6 +178,7 @@ export const mappingAPI = {
   getMappings: async () => {
     try {
       const response = await api.get('/mappings');
+      console.log(response)
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to fetch mappings' };
@@ -163,7 +192,16 @@ export const mappingAPI = {
     } catch (error) {
       throw error.response?.data || { message: 'Failed to create mapping' };
     }
+  },
+
+  deleteMapping: async (mappingId) => {
+    try {
+      const response = await api.delete(`/mappings/${mappingId}`);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || { message: 'Failed to delete mapping' };
+    }
   }
 };
 
-export default api; 
+export default api;

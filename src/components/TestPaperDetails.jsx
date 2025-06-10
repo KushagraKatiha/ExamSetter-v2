@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Select, courses, Input, Button, examList, semesterList } from './index';
 import { useDispatch, useSelector } from 'react-redux';
 import { editDetails, setDetails } from '../store/features/questionPaperDetails/detailsSlice';
+import { adminAPI, subjectAPI, mappingAPI } from '../services/api';
 
 function TestPaperDetails() {
     const dispatch = useDispatch();
@@ -16,9 +17,119 @@ function TestPaperDetails() {
     const [teacherName, setTeacherName] = useState('');
     const [teacherId, setTeacherId] = useState('');
 
+    // States for teachers, subjects, and mappings
+    const [teachers, setTeachers] = useState([]);
+    const [subjects, setSubjects] = useState([]);
+    const [mappings, setMappings] = useState([]);
+    const [selectedTeacher, setSelectedTeacher] = useState(null);
+    const [teacherSubjects, setTeacherSubjects] = useState([]);
+    const [selectedSubject, setSelectedSubject] = useState('');
+
+    // Fetch teachers, subjects, and mappings on component mount
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [teachersData, subjectsData, mappingsData] = await Promise.all([
+                    adminAPI.getTeachers(),
+                    subjectAPI.getSubjects(),
+                    mappingAPI.getMappings()
+                ]);
+                setTeachers(teachersData);
+                setSubjects(subjectsData);
+                setMappings(mappingsData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
+
+    // Handle teacher selection
+    const handleTeacherChange = (e) => {
+        const selectedTeacherId = e.target.value;
+        const teacher = teachers.find(t => t._id === selectedTeacherId);
+        
+        if (teacher) {
+            setTeacherName(teacher.name);
+            setTeacherId(teacher._id);
+            setSelectedTeacher(teacher);
+
+            // Find all mappings for this teacher
+            const teacherMappings = mappings.filter(mapping => {
+                // Handle both populated and non-populated mapping objects
+                const mappingTeacherId = typeof mapping.teacherId === 'object' 
+                    ? mapping.teacherId._id 
+                    : mapping.teacherId;
+                return mappingTeacherId === teacher._id;
+            });
+
+            // Get subjects for this teacher
+            const subjectsForTeacher = teacherMappings.map(mapping => {
+                // Handle both populated and non-populated mapping objects
+                if (typeof mapping.subjectId === 'object') {
+                    return mapping.subjectId;
+                } else {
+                    return subjects.find(subject => subject._id === mapping.subjectId);
+                }
+            }).filter(Boolean);
+
+            console.log('Teacher Mappings:', teacherMappings);
+            console.log('Subjects for Teacher:', subjectsForTeacher);
+            
+            setTeacherSubjects(subjectsForTeacher);
+            setSelectedSubject(''); // Reset selected subject
+            clearSubjectDetails();
+        } else {
+            clearTeacherAndSubjectDetails();
+        }
+    };
+
+    // Handle subject selection
+    const handleSubjectChange = (e) => {
+        const subjectId = e.target.value;
+        console.log('Selected Subject ID:', subjectId);
+        console.log('Available Subjects:', teacherSubjects);
+        
+        const subject = teacherSubjects.find(s => s._id === subjectId);
+        console.log('Found Subject:', subject);
+        
+        if (subject) {
+            setSelectedSubject(subjectId);
+            populateSubjectDetails(subject);
+        } else {
+            clearSubjectDetails();
+        }
+    };
+    
+    // Populate subject details
+    const populateSubjectDetails = (subject) => {
+        setCourseName(subject.name);
+        setCourseCode(subject.code);
+        setOtherProgram(subject.otherProgram || '');
+    };
+
+    // Clear subject details
+    const clearSubjectDetails = () => {
+        setSelectedSubject('');
+        setCourseName('');
+        setCourseCode('');
+        setSemester('');
+        setSelectedPrograms([]);
+        setOtherProgram('');
+    };
+
+    // Clear teacher and subject details
+    const clearTeacherAndSubjectDetails = () => {
+        setTeacherName('');
+        setTeacherId('');
+        setSelectedTeacher(null);
+        setTeacherSubjects([]);
+        clearSubjectDetails();
+    };
+
     const handleProgramSelection = (e) => {
         const program = e.target.value;
-        if (!selectedPrograms.includes(program)) {
+        if (program && !selectedPrograms.includes(program)) {
             setSelectedPrograms([...selectedPrograms, program]);
         }
     };
@@ -41,7 +152,8 @@ function TestPaperDetails() {
             courseName,
             otherProgram,
             teacherName,
-            teacherId
+            teacherId,
+            subjectId: selectedSubject
         };
         dispatch(setDetails(details));
     };
@@ -67,15 +179,24 @@ function TestPaperDetails() {
                             />
                         </td>
                         <td className='p-2'>
-                            <Input
-                                label="Faculty's Name"
-                                type='text'
-                                placeholder='Teacher...'
-                                value={teacherName}
-                                onChange={(e) => setTeacherName(e.target.value)}
-                                disabled={disabled}
-                                className="bg-[#333333] text-white border border-[#888888]"
-                            />
+                            <div>
+                                <label className="block text-sm font-medium text-white mb-1">
+                                    Faculty's Name
+                                </label>
+                                <select
+                                    value={teacherId}
+                                    onChange={handleTeacherChange}
+                                    disabled={disabled}
+                                    className="w-full bg-[#333333] text-white border border-[#888888] p-2 rounded focus:outline-none focus:border-blue-500"
+                                >
+                                    <option value="">Select Teacher</option>
+                                    {teachers.map((teacher) => (
+                                        <option key={teacher._id} value={teacher._id}>
+                                            {teacher.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </td>
                         <td className='p-2'>
                             <Input
@@ -83,12 +204,37 @@ function TestPaperDetails() {
                                 type='text'
                                 placeholder='ID...'
                                 value={teacherId}
-                                onChange={(e) => setTeacherId(e.target.value)}
-                                disabled={disabled}
+                                disabled={true}
                                 className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
                     </tr>
+
+                    {/* Course Selection Row */}
+                    {teacherSubjects.length > 0 && (
+                        <tr>
+                            <td className='p-2' colSpan="3">
+                                <div>
+                                    <label className="block text-sm font-medium text-white mb-1">
+                                        Select Course
+                                    </label>
+                                    <select
+                                        value={selectedSubject}
+                                        onChange={handleSubjectChange}
+                                        disabled={disabled}
+                                        className="w-full bg-[#333333] text-white border border-[#888888] p-2 rounded focus:outline-none focus:border-blue-500"
+                                    >
+                                        <option value="">Select Course</option>
+                                        {teacherSubjects.map((subject) => (
+                                            <option key={subject._id} value={subject._id}>
+                                                {subject.name} ({subject.code})
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    )}
 
                     {/* Second Row */}
                     <tr>
@@ -96,10 +242,8 @@ function TestPaperDetails() {
                             <Input
                                 label='Course Name'
                                 type='text'
-                                placeholder='Enter course name...'
                                 value={courseName}
-                                onChange={(e) => setCourseName(e.target.value)}
-                                disabled={disabled}
+                                disabled={true}
                                 className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
@@ -107,10 +251,8 @@ function TestPaperDetails() {
                             <Input
                                 label='Course Code'
                                 type='text'
-                                placeholder='Enter course code...'
                                 value={courseCode}
-                                onChange={(e) => setCourseCode(e.target.value)}
-                                disabled={disabled}
+                                disabled={true}
                                 className="bg-[#333333] text-white border border-[#888888]"
                             />
                         </td>
@@ -132,6 +274,7 @@ function TestPaperDetails() {
                             <Select
                                 options={courses}
                                 label='Program Name'
+                                value={selectedPrograms[0] || ''}
                                 onChange={handleProgramSelection}
                                 disabled={disabled}
                                 className="bg-[#333333] text-white border border-[#888888]"
@@ -157,7 +300,7 @@ function TestPaperDetails() {
                         </td>
                     </tr>
 
-                    {/* Fourth Row */}
+                    {/* Fourth Row - Selected Programs */}
                     <tr>
                         <td colSpan="3" className='p-2'>
                             <div className='mt-1'>

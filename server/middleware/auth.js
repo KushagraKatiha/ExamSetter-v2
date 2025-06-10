@@ -8,9 +8,11 @@ const auth = async (req, res, next) => {
     if (!token) {
       return res.status(401).json({ message: 'Authentication required' });
     }
-
+    
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
-    const teacher = await Teacher.findOne({ _id: decoded.teacherId });
+    
+    const teacher = await Teacher.findOne({
+      _id:decoded.id});
 
     if (!teacher) {
       return res.status(401).json({ message: 'User not found or inactive' });
@@ -20,7 +22,7 @@ const auth = async (req, res, next) => {
     req.token = token;
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Please authenticate', error: error.message });
+    res.status(401).json({ message: 'Please authenticate the user', error: error.message });
   }
 };
 

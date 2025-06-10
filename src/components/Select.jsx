@@ -11,9 +11,9 @@ function Select({ options, labelStyle, optionStyle, label, onChange, value, disa
         value={value}
         disabled={disabled}
       >
-        {options.map(option => (
-          <option key={option.value} className={`bg-gray-800 text-white ${optionStyle}`} value={option.value}>
-            {option.fullName}
+        {options?.map(option => (
+          <option key={option?.value} className={`bg-gray-800 text-white ${optionStyle}`} value={option?.value}>
+            {option?.fullName}
           </option>
         ))}
       </select>
